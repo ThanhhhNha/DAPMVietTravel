@@ -1,0 +1,330 @@
+﻿
+@{
+    ViewBag.Title = "AdminTrangChu";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang chủ VietTravel</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" >
+</head>
+<body>
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success">
+            @TempData["SuccessMessage"]
+        </div>
+    }
+
+    <section class="hero">
+        <img src="~/image/bg.jpg" alt="imgbody" style="width: -webkit-fill-available; height: 500px;" />
+    </section>
+    <div class="body grid" style="width: -webkit-fill-available;">
+
+        <div class="combo-section">
+            <h2>COMBO GIÁ TỐT</h2>
+            <hr>
+            <p>Với sự hợp tác giảm giá ưu đãi cùng hệ thống đối tác lớn, chúng tôi tự tin mang đến cho quý khách combo vé máy bay và khách sạn với giá tốt nhất!</p>
+        </div>
+
+        <div class="combo-container">
+
+            <div class="combo-card">
+                <div class="info">
+                    <p><i class="fas fa-plane"></i> TP. HỒ CHÍ MINH → PHÚ QUỐC</p>
+                    <p><i class="fas fa-code"></i> Mã tour: FESGN8764-064-021024VU-H</p>
+                    <p><i class="fas fa-calendar-alt"></i> Khởi hành: 02/10/2024</p>
+                    <p><i class="fas fa-hotel"></i> Khách sạn: 3 sao</p>
+                    <p><i class="fas fa-plane"></i> Phương tiện: Máy bay</p>
+                    <p class="price">Giá từ: 2,590,000 ₫/khách</p>
+                </div>
+                <div class="image">
+                    <img src="~/image/phuquoc.jpg" alt="Phú Quốc" />
+                </div>
+            </div>
+
+
+            <div class="combo-card">
+                <div class="info">
+                    <p><i class="fas fa-plane"></i> TP. HỒ CHÍ MINH → QUY NHƠN</p>
+                    <p><i class="fas fa-code"></i> Mã tour: FESGN5901-075-031024VU-F-7</p>
+                    <p><i class="fas fa-calendar-alt"></i> Khởi hành: 03/10/2024</p>
+                    <p><i class="fas fa-hotel"></i> Khách sạn: 4 sao</p>
+                    <p><i class="fas fa-plane"></i> Phương tiện: Máy bay</p>
+                    <p class="price">Giá từ: 3,790,000 ₫ / khách</p>
+                </div>
+                <div class="image">
+                    <img src="~/image/quynhon.jpg" alt="Quy Nhơn" />
+                </div>
+            </div>
+
+            <div class="combo-card">
+                <div class="info">
+                    <p><i class="fas fa-plane"></i> TP. HỒ CHÍ MINH → PHÚ QUỐC</p>
+                    <p><i class="fas fa-code"></i> Mã tour: FESGN8769-005-031024VU-H-7</p>
+                    <p><i class="fas fa-calendar-alt"></i> Khởi hành: 03/10/2024</p>
+                    <p><i class="fas fa-hotel"></i> Khách sạn: 4 sao</p>
+                    <p><i class="fas fa-plane"></i> Phương tiện: Máy bay</p>
+                    <p class="price">Giá từ: 3,490,000 ₫ / khách</p>
+                </div>
+                <div class="image">
+                    <img src="~/image/phuquoc.jpg" alt="Phú Quốc" />
+                </div>
+            </div>
+
+            <div class="combo-card">
+
+                <div class="info">
+                    <p><i class="fas fa-plane"></i> TP. HỒ CHÍ MINH → CÔN ĐẢO</p>
+                    <p><i class="fas fa-code"></i> Mã tour: FESGN8232-018-051024VN-H-7</p>
+                    <p><i class="fas fa-calendar-alt"></i> Khởi hành: 05/10/2024</p>
+                    <p><i class="fas fa-hotel"></i> Khách sạn: 5 sao</p>
+                    <p><i class="fas fa-plane"></i> Phương tiện: Máy bay</p>
+                    <p class="price">Giá từ: 4,590,000 ₫ / khách</p>
+                </div>
+                <div class="image">
+                    <img src="~/image/condao.jpg" alt="Côn Đảo" />
+                </div>
+            </div>
+        </div>
+        <script>
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.addEventListener('click', function () {
+                    document.querySelectorAll('.tab').forEach(el => el.classList.remove('active'));
+                    document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+
+                    this.classList.add('active');
+                    document.querySelector(this.dataset.target).classList.add('active');
+                });
+            });
+
+
+        </script>
+</body>
+</html>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 50px;
+        padding: 10px;
+        
+    }
+
+    /* Tab styles */
+    .tab-container {
+        transform: translateY(-30%);
+        height: 200px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: white;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .tabs {
+        display: flex;
+        justify-content: space-between;
+        border-bottom: 2px solid #eee;
+    }
+
+    .tab {
+        flex: 1;
+        text-align: center;
+        cursor: pointer;
+        font-weight: bold;
+    }
+
+        .tab.active {
+            color: #0056a3;
+            border-bottom: 3px solid #0056a3;
+        }
+
+    .tab-content {
+        display: none;
+        padding: 20px;
+    }
+
+        .tab-content.active {
+            display: block;
+        }
+
+    .search-input, .search-options {
+        margin-bottom: 20px;
+    }
+
+        .search-input input {
+            width: 100%;
+            height: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+    .search-options {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    }
+
+        .search-options select, .search-options input {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+    .search-button {
+        padding: 10px 20px;
+        background-color: #0056a3;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+        .search-button:hover {
+            background-color: #003b7a;
+        }
+
+    .combo-container {
+        display: flex;
+        gap: 20px;
+        justify-content: space-between;
+    }
+
+    .combo-card {
+        position: relative;
+        /*width: 350px;*/
+        padding: 15px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        background-color: #fff;
+        overflow: hidden;
+        transition: 0.3s ease-in-out;
+    }
+
+        .combo-card .info {
+            text-align: justify;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: auto;
+        }
+
+            .combo-card .info p {
+                margin: 5px 0;
+                line-height: 1.5;
+            }
+
+        .combo-card .price {
+            font-weight: bold;
+            text-align: right;
+        }
+
+        .combo-card .info {
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        .combo-card .image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+            .combo-card .image img {
+                width: 100%;
+                height: 100%;
+            }
+
+        .combo-card:hover .info {
+            opacity: 0;
+        }
+
+        .combo-card:hover .image {
+            display: flex;
+        }
+
+    .combo-section {
+        padding: 20px;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+        .combo-section h2 {
+            color: #0056a3;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .combo-section hr {
+            width: 50px;
+            margin: 10px auto;
+            border: 2px solid #0056a3;
+        }
+
+        .combo-section p {
+            font-size: 16px;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+    #province-suggestions, #hotel-province-suggestions {
+        position: absolute;
+        max-height: 150px;
+        overflow-y: auto;
+        width: 361px;
+        background-color: white;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        z-index: 1000;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        display: none;
+    }
+
+        #province-suggestions li, #hotel-province-suggestions li {
+            padding: 10px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+            #province-suggestions li:hover, #hotel-province-suggestions li:hover {
+                background-color: #f0f0f0;
+            }
+
+    .combo-section {
+        padding: 20px;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+        .combo-section h2 {
+            color: #0056a3;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .combo-section hr {
+            width: 50px;
+            margin: 10px auto;
+            border: 2px solid #0056a3;
+        }
+
+        .combo-section p {
+            font-size: 16px;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+</style>
+

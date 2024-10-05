@@ -1,0 +1,127 @@
+﻿@model VietTravel.Models.Admin
+@{
+    ViewBag.Title = "Thông tin quản trị viên";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var admin = Session["user"] as VietTravel.Models.Admin;
+}
+
+
+<div class="container detailsAdmin" style="color: #6f6f6f">
+    <div class="" style="padding-right: 60px">
+        <div class="admin-info" style="display: flex; margin-top: 20px;">
+            <i class="fas fa-user-circle" style="font-size: 50px; padding-right: 15px"></i>
+            <div class="">
+                <p class="textMian" style="margin-bottom: 0;">@admin?.TenAdmin</p>
+                <p class="text-none1" style="margin-bottom: 0; font-size: 14px">
+                    <i class="fas fa-pen" style="font-size: 12px"></i>
+                    @Html.ActionLink("Chỉnh Sửa", "Edit", new { id = admin.MaAdmin })
+                </p>
+            </div>
+        </div>
+        <hr />
+
+        <div class="sidebar">
+            <div class="detailsUser-leftItem">
+                <i class="fas fa-user"></i>
+                <p class="text-none1" style="font-size: 14px; padding-left: 16px"><a href="">Tài khoản của tôi</a></p>
+            </div>
+            <div class="detailsUser-leftItem">
+                <i class="fas fa-shopping-cart"></i>
+                <p class="text-none1" style="font-size: 14px; padding-left: 12px"><a href="">Thông tin giỏ hàng</a></p>
+            </div>
+            <div class="detailsUser-leftItem1">
+                @if (admin != null)
+                {
+                    <a href="@Url.Action("DangXuat","Account")" class="text-none btn-primarys" style="padding: 5px 15px; text-decoration: none; border-radius: 5px; font-weight: 700; font-size: 17px; background-color: #6f6f6f; color: #fff">Đăng xuất</a>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="detailsUser-right">
+        <h4 style="color: #6f6f6f; font-weight: 700; margin-top: 20px; font-size: 1.5rem;">Hồ sơ của tôi</h4>
+        <p class="">Quản lý thông tin hồ sơ để bảo mật tài khoản</p>
+        <hr />
+        <dl class="dl-horizontal" style="color: #6f6f6f">
+            <div class="detailsUser-item">
+                <dt class="detailsUser-itemMain">Họ và Tên: </dt>
+                <dd>@Html.DisplayFor(model => model.TenAdmin)</dd>
+            </div>
+            <div class="detailsUser-item">
+                <dt class="detailsUser-itemMain">UserName: </dt>
+                <dd>@Html.DisplayFor(model => model.Username)</dd>
+            </div>
+            <div class="detailsUser-item">
+                <dt class="detailsUser-itemMain">Vai Trò: </dt>
+                <dd>@Html.DisplayFor(model => model.VaiTro)</dd>
+            </div>
+
+        </dl>
+    </div>
+</div>
+
+<style>
+    .detailsAdmin {
+        margin-top: 120px;
+        margin-bottom: 70px;
+        padding-left: 20px;
+        display: flex;
+        font-family: Arial;
+    }
+
+    hr {
+        margin: 1rem 0;
+        color: inherit;
+        border: 0;
+        border-top: var(--bs-border-width) solid;
+        opacity: 0.25;
+    }
+
+    .detailsAdmin-item {
+        display: flex;
+        margin-bottom: 15px;
+    }
+
+    .detailsAdmin-itemMain {
+        padding-right: 20px;
+    }
+
+    .text-none1 a {
+        text-decoration: none;
+        color: #6f6f6f;
+    }
+
+    .textMian {
+        font-size: 1.5rem;
+        color: #333;
+        font-weight: 700;
+    }
+
+    .detailsAdmin-right {
+        padding: 30px;
+        background: #fff;
+        box-shadow: 0 1px 2px 0 rgba(0, 0, 0, .13);
+        border-radius: 0.125rem;
+        flex: 1;
+    }
+
+    .detailsAdmin-leftItem {
+        display: flex;
+        margin-bottom: 10px;
+    }
+
+    .detailsAdmin-leftItem1 {
+    }
+
+    .btn-primarys {
+        background-color: #e6e3de;
+        color: #6f6f6f;
+        justify-content: center;
+        display: flex;
+    }
+
+        .btn-primarys:hover {
+            color: #fff !important;
+            background-color: #6f6f6f;
+            cursor: pointer;
+        }
+</style>

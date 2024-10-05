@@ -1,0 +1,111 @@
+﻿@model VietTravel.Models.User
+
+@{
+    ViewBag.Title = "Đăng Ký Tài Khoản";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewBag.Title</title>
+    <link rel="stylesheet" href="~/Content/bootstrap.min.css" />
+    <style>
+        body {
+            background-color: #f6f6f6;
+        }
+
+        .container01 {
+            width: 500px;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+
+            margin: 70px auto;
+        }
+
+        h1 {
+            font-size: 30px;
+            color: #154583;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin: 15px 0; 
+        }
+
+        .btn {
+            width: 130px;
+            height: 45px;
+            background: #154583;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            color: #ffffff;
+            font-weight: 600;
+            margin: 20px auto;
+            display: block; 
+            transition: background 0.3s;
+        }
+
+            .btn:hover {
+                background: #214473;
+                color: #fff;
+            }
+
+        .header-list {
+            margin-top: 20px; 
+        }
+
+            .header-list p {
+                margin: 0; 
+            }
+    </style>
+</head>
+<body>
+    <div class="container01">
+        <h1>Đăng Ký Tài Khoản</h1>
+
+        @using (Html.BeginForm("DangKy", "Account", FormMethod.Post))
+        {
+            <div class="form-group">
+                @Html.Label("TenUser", "Tên Người Dùng", new { @class = "control-label" })
+                @Html.TextBox("tenUser", null, new { @class = "form-control", placeholder = "Nhập tên người dùng", required = "required" })
+            </div>
+
+            <div class="form-group">
+                @Html.Label("Username", "Tên Đăng Nhập", new { @class = "control-label" })
+                @Html.TextBox("username", null, new { @class = "form-control", placeholder = "Nhập tên đăng nhập", required = "required" })
+            </div>
+
+            <div class="form-group">
+                @Html.Label("Password", "Mật Khẩu", new { @class = "control-label" })
+                @Html.Password("password", null, new { @class = "form-control", placeholder = "Nhập mật khẩu", required = "required" })
+            </div>
+
+            <div class="form-group">
+                @Html.Label("Email", "Địa Chỉ Email", new { @class = "control-label" })
+                @Html.TextBox("email", null, new { @class = "form-control", placeholder = "Nhập địa chỉ email", required = "required" })
+            </div>
+
+            <div class="form-group">
+                @Html.Label("DienThoai", "Điện Thoại", new { @class = "control-label" })
+                @Html.TextBox("dienThoai", null, new { @class = "form-control", placeholder = "Nhập số điện thoại", required = "required" })
+            </div>
+
+            <button type="submit" class="btn btn-primary">Đăng Ký</button>
+        }
+
+        <div class="header-list">
+            <p>Đã có tài khoản? <a href="@Url.Action("DangNhap", "Account")">Đăng Nhập</a></p>
+        </div>
+    </div>
+
+    <script src="~/Scripts/jquery-3.6.0.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+﻿@model VietTravel.Models.User
+
+@{
+    ViewBag.Title = "Đăng ký";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewBag.Title</title>
+    <link rel="stylesheet" href="~/Content/bootstrap.min.css" />
+    <link href="~/Content/style.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="wrapper">
+        <form class="register-form">
+            <h1>Đăng ký</h1>
+            @using (Html.BeginForm("DangKy", "Account", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="input-box">
+                    @Html.TextBoxFor(m => m.TenUser, new { @class = "form-control", placeholder = "Nhập tên người dùng" })
+                </div>
+
+                <div class="input-box">
+                    @Html.TextBoxFor(m => m.Username, new { @class = "form-control", placeholder = "Nhập tên đăng nhập" })
+                    @Html.ValidationMessageFor(m => m.Username)
+                </div>
+
+                <div class="input-box">
+                    @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Nhập mật khẩu" })
+                </div>
+
+                <div class="input-box">
+                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "Nhập địa chỉ email" })
+                </div>
+
+                <div class="input-box">
+                    @Html.TextBoxFor(m => m.DienThoai, new { @class = "form-control", placeholder = "Nhập số điện thoại" })
+                </div>
+
+                <div style="display: flex; justify-content: center">
+                    <button type="submit" class="btn">Đăng ký</button>
+                </div>
+            }
+            <br />
+            <p style="justify-content: center; display: flex;">Đã có tài khoản? <a href="@Url.Action("DangNhap", "Account")" style="color: #409CD1;">Đăng Nhập</a></p>
+        </form>
+    </div>
+
+    <script src="~/Scripts/jquery-3.6.0.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+</body>
+</html>

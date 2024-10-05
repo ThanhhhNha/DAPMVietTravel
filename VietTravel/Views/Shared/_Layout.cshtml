@@ -1,0 +1,281 @@
+﻿@using VietTravel.Models
+
+
+<!DOCTYPE html>
+<html data-bs-theme="">
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="icon" type="image/png" sizes="64x64" href="/favicons/favicon.png">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="theme-color" content="#ffffff">
+    <link href="~/Content/style.css" rel="stylesheet" />
+    <link href="~/Content/responsive.css" rel="stylesheet" />
+</head>
+<body style="background-color: #fbfbfb" class="app">
+
+    <div style="overflow: hidden">
+        <div class="header header-pc" style="background-color: #ffffff; padding: 3px 0">
+            <div class="container" style="display: flex; align-items: center;">
+                <div class="navbar-left">
+                    <a href="@Url.Action("TrangChu","Home")">
+                        <img src="~/image/logo01.png" style="height:45px" />
+                    </a>
+                </div>
+                <div class="navbar-center">
+                    <ul class="navbar-left_items">
+                        <li class="navbar-left_item">
+                            @Html.ActionLink("Trang chủ", "TrangChu", "Home", new { area = "" }, new { @class = "text-none" })
+                        </li>
+                        <li class="navbar-left_item">
+                            @Html.ActionLink("Tour du lịch", "Tourdulich", "Tourdulich", new { area = "" }, new { @class = "text-none" })
+                        </li>
+                        <li class="navbar-left_item">
+                            @Html.ActionLink("Khuyến mãi", "Khuyenmai", "Thuonghieu", new { area = "" }, new { @class = "text-none" })
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="navbar-right" style="margin-left: auto;">
+                    <ul class="navbar-right_items">
+                        <li class="navbar-right_item navbar-right-dropDown" style="padding-left: 20px; padding-right: 0">
+                            <a href="@Url.Action("DangNhap","Account")" class="login-link" style="display: flex; align-items: center; text-decoration: none;">
+                                <i class="fas fa-user" style="font-size: 24px; color: #6f6f6f;"></i>
+                            </a>
+                        </li>
+                        @if (Session["Account"] != null)
+                        {
+                            var user = (User)Session["Account"];
+                            <li style="padding-left: 5px; font-size: 17px; color: #6f6f6f;">
+                                <a href="@Url.Action("CaNhan", "Account", new { id = user.MaUser })" style="text-decoration: none; font-weight: 700; font-size: 17px; color: #6f6f6f;">
+                                    Xin chào, @user.TenUser!
+                                </a>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @RenderBody()
+
+    <footer class="footer" style="background-color: #f5f5f5">
+        <div class="footer-left">
+            <h3 style="color: #333;">Khám Phá Cùng VietTravel</h3>
+            <div class="content-right col-9">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.4602263434367!2d106.66478451104228!3d10.776019959156049!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752edb765b5c25%3A0x9a3519bdad5a85a3!2zVHLGsOG7nW5nIMSQ4bqhaSBo4buNYyBOZ2_huqFpIG5n4buvIC0gVGluIGjhu41jIFRow6BuaCBwaOG7kSBI4buTIENow60gTWluaCAoSFVGTElUKQ!5e0!3m2!1svi!2s!4v1720094885391!5m2!1svi!2s"
+                        width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
+        </div>
+        <div class="footer-right">
+            <div class="footer-right_top">
+                <div class="footer-right_content col">
+                    <p class="item-box_text">Đặt tour & Hỗ trợ</p>
+                    <p class="footer-text_sub">Hỏi đáp</p>
+                    <p class="footer-text_sub">Hướng dẫn đặt tour</p>
+                    <p class="footer-text_sub">Chính sách tour</p>
+                    <p class="footer-text_sub">Điều khoản bảo mật</p>
+                    <p class="footer-text_sub">Liên hệ chúng tôi</p>
+                </div>
+                <div class="footer-right_content col" style="text-align: center;">
+                    <p class="item-box_text">Phương thức thanh toán</p>
+                    <div class="payment-methods">
+                        <img src="~/image/visa.png" alt="Visa" />
+                        <img src="~/image/card.png" alt="MasterCard" />
+                        <img src="~/image/apple-pay.png" alt="Apple Pay" />
+                        <img src="~/image/paypal.png" alt="PayPal" />
+                    </div>
+                    <div class="app-download" style="margin-top: 20px;">
+                        <p class="item-box_text">Ứng dụng di động</p>
+                        <div style="display: flex; justify-content: space-around; margin-top:10px;">
+                            <div>
+                                <img src="~/image/android.jpg" alt="Google Play" style="width: 100px;" />
+                                <img src="~/image/appStore.jpg" alt="QR Code Google Play" style="width: 100px;" />
+                            </div>
+                            <div>
+                                <img src="~/image/apple.jpg" alt="App Store" style="width: 100px;" />
+                                <img src="~/image/appStore.jpg" alt="QR Code App Store" style="width: 100px;" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-right_content col">
+                    <p class="item-box_text">Mạng xã hội</p>
+                    <div class="social-links" style="display: flex; justify-content: space-around; align-items: center;">
+                        <a href="https://www.facebook.com/vietravel/" style="color: #6f6f6f; text-decoration: none">
+                            <i class="fab fa-facebook"></i> Facebook
+                        </a>
+                        <a href="https://travel.com.vn/" style="color: #6f6f6f; text-decoration: none">
+                            <i class="fas fa-globe"></i> Website
+                        </a>
+                        <a href="https://www.youtube.com/channel/UCY4diIi4ZvrcZIfpLTTM11g" style="color: #6f6f6f; text-decoration: none">
+                            <i class="fab fa-youtube"></i> Youtube
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-right_bottom">
+                <div class="footer-right_bottom-70">
+                    <p class="footer-text" style="font-size: 18px">VietTravel - KHÁM PHÁ CÙNG BẠN</p>
+                    <p class="footer-text_sub1" style="font-size: 15px">
+                        VietTravel là hệ thống tour du lịch chuyên nghiệp với dịch vụ chất lượng và uy tín hàng đầu. Chúng tôi không chỉ đơn thuần là một đơn vị tổ chức tour, mà còn là người bạn đồng hành đáng tin cậy trên hành trình khám phá những điểm đến tuyệt vời nhất. Với phương châm "Khám phá cùng bạn", chúng tôi luôn nỗ lực mang đến trải nghiệm tốt nhất cho khách hàng, từ những chuyến đi ngắn ngày đến các tour du lịch dài ngày đầy thú vị.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="~/Scripts/jquery-3.6.0.min.js"></script>
+    <script src="~/Scripts/bootstrap.bundle.min.js"></script>
+    <script src="~/Scripts/script.js"></script>
+</body>
+</html>
+
+
+
+<style>
+    .wrapper {
+        background-color: var(--white);
+    }
+
+    .content {
+        background-color: var(--gray);
+    }
+
+    .title {
+        color: var(--black);
+    }
+
+        .title + p {
+            color: var(--black);
+        }
+
+    :root {
+        --white: white;
+        --black: black;
+        --gray: #fafafa;
+    }
+
+    [data-theme="dark"] {
+        --white: black;
+        --black: white;
+        --gray: black;
+    }
+
+    .theme-switch-wrapper {
+        display: flex;
+        align-items: center;
+    }
+
+        .theme-switch-wrapper label {
+            margin-right: 10px;
+        }
+
+    .theme-switch {
+        position: relative;
+        display: inline-block;
+        width: 50px;
+        height: 26px;
+    }
+
+        .theme-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+    .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        transition: .4s;
+        border-radius: 34px;
+    }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+    input:checked + .slider {
+        background-color: #2196F3;
+    }
+
+        input:checked + .slider:before {
+            transform: translateX(24px);
+        }
+
+    .social-links {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+    }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 16px;
+            color: #6f6f6f;
+            text-decoration: none;
+            margin: 10px 0;
+        }
+
+            .social-links a i {
+                font-size: 20px;
+            }
+
+
+
+    .navbar-left_items {
+        list-style: none;
+        display: flex;
+        gap: 20px; 
+        padding: 0;
+        margin: 0;
+    }
+
+    .navbar-left_item a {
+        text-decoration: none;
+        color: #333;
+        padding: 10px 15px;
+        transition: color 0.3s ease;
+    }
+
+        .navbar-left_item a:hover {
+            color: #007BFF; 
+        }
+
+    .navbar-right_items {
+        display: flex;
+        align-items: center;
+    }
+
+    .login-link {
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+        color: #6f6f6f;
+        font-size: 24px;
+    }
+
+        .login-link:hover {
+            color: #007BFF; 
+        }
+
+</style>
+

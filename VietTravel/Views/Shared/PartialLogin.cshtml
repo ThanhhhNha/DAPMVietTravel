@@ -1,0 +1,16 @@
+﻿@using VietTravel.Models
+@{
+    var user = Session["Account"] as User; 
+}
+
+<div class="float-end">
+    @if (user != null)
+    {<a href="@Url.Action("CaNhan","Account",new { id = user.MaUser})" class="text-none" style="text-decoration: none; /* font-size: 12px; */ color: #6f6f6f; font-weight: 700; padding-left: 5px; font-size: 17px">@user.TenUser</a>
+}
+else
+{
+    <a href="@Url.Action("DangNhap", "Account")" class="text-none" style="text-decoration: none; color: #6f6f6f; font-weight: 700; padding-left: 5px; font-size: 17px">
+        Đăng Nhập
+    </a>
+}
+</div>

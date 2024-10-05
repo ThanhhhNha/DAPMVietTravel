@@ -1,0 +1,45 @@
+﻿
+@{
+    ViewBag.Title = "AdminDangNhap";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    <link href="~/Content/style.css" rel="stylesheet" />
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+}
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Đăng Nhập</title>
+    <link href="~/Content/style.css" rel="stylesheet" />
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+
+<body class="web">
+    <div class="wrapper">
+        <form class="login-form" method="post" action="@Url.Action("AdminDangNhap", "Account", new { area = "Admin" })">
+            @Html.AntiForgeryToken()
+            <h1>Đăng nhập</h1>
+            <div class="input-box">
+                <i class="bx bx-user-circle"></i>
+                <input type="text" name="username" placeholder="Tên đăng nhập" autofocus required />
+            </div>
+            <div class="input-box">
+                <i class="bx bx-lock-alt"></i>
+                <input type="password" name="password" placeholder="Mật khẩu" required />
+            </div>
+            <div class="remember-forgot">
+                <label><input type="checkbox" /> Nhớ mật khẩu</label>
+                <a href="#">Quên mật khẩu?</a>
+            </div>
+            <div class="error-container">
+                <p class="text-danger">@TempData["error"]</p>
+            </div>
+            <button type="submit" class="btn">Đăng nhập</button>
+            
+
+        </form>
+    </div>
+</body>
+</html>
+
