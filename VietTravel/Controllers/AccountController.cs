@@ -135,8 +135,8 @@ namespace VietTravel.Controllers
                 return View();
             }
         }
-
-        public ActionResult ChinhSua(int? id)
+      
+        public ActionResult ChinhSua(string id)
         {
             if (id == null)
             {
@@ -150,7 +150,7 @@ namespace VietTravel.Controllers
             return View(user);
         }
 
-        
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult ChinhSua([Bind(Include = "MaUser,TenUser,Username,Password,Email,DienThoai")] User user)

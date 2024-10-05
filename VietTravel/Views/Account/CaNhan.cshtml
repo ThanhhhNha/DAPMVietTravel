@@ -11,10 +11,10 @@
         <div class="user-info" style="display: flex; margin-top: 20px;">
             <i class="fas fa-user-circle" style="font-size: 50px; padding-right: 15px"></i>
             <div class="">
-                <p class="textMian" style="margin-bottom: 0;">@Html.DisplayFor(model => model.TenUser)</p>
+                <p class="textMian" style="margin-bottom: 0;"> @Html.DisplayFor(model => model.Username)</p>
                 <p class="text-none1" style="margin-bottom: 0; font-size: 14px">
                     <i class="fas fa-pen" style="font-size: 12px"></i>
-                    <a href="@Url.Action("ChinhSua", "Account", new { id = user.MaUser })" style="text-decoration: none; color: #6f6f6f;">Chỉnh sửa thông tin</a> 
+                    @Html.ActionLink("Chỉnh Sửa", "ChinhSua", new { id = Model.MaUser })
                 </p>
             </div>
         </div>
