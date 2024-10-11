@@ -143,7 +143,8 @@
     <Compile Include="Areas\Admin\Controllers\UserManagementController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\HotelController.cs" />
+    <Compile Include="Controllers\ListHotelsController.cs" />
+    <Compile Include="Controllers\LoaiPhongsController.cs" />
     <Compile Include="Controllers\ToursController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -252,6 +253,11 @@
     <Content Include="image\fb.jpg" />
     <Content Include="image\footer.jpg" />
     <Content Include="image\footerbg.jpg" />
+    <Content Include="image\hotel\hotelA.jpg" />
+    <Content Include="image\hotel\hotelB.jpg" />
+    <Content Include="image\hotel\hotelC.jpg" />
+    <Content Include="image\hotel\hotelD.jpg" />
+    <Content Include="image\hotel\hotelE.jpg" />
     <Content Include="image\internet.png" />
     <Content Include="image\logo.jpg" />
     <Content Include="image\logo01.png" />
@@ -283,10 +289,9 @@
     <Content Include="Areas\Admin\Views\Account\AdminCaNhan.cshtml" />
     <Content Include="Areas\Admin\Views\UserManagement\Create.cshtml" />
     <Content Include="Areas\Admin\Views\UserManagement\Delete.cshtml" />
-    <Content Include="Areas\Admin\Views\UserManagement\Details.cshtml" />
-    <Content Include="Areas\Admin\Views\UserManagement\Edit.cshtml" />
-    <Content Include="Areas\Admin\Views\UserManagement\Index.cshtml" />
     <Content Include="Areas\Admin\Views\UserManagement\QuanLyNguoiDung.cshtml" />
+    <Content Include="Areas\Admin\Views\UserManagement\ChiTietNguoiDung.cshtml" />
+    <Content Include="Areas\Admin\Views\UserManagement\ChinhSuaNguoiDung.cshtml" />
     <None Include="Dockerfile" />
     <None Include=".dockerignore">
       <DependentUpon>Dockerfile</DependentUpon>
@@ -331,11 +336,6 @@
     <Content Include="Views\Tour\Details.cshtml" />
     <Content Include="Views\Tour\Edit.cshtml" />
     <Content Include="Views\Tour\Index.cshtml" />
-    <Content Include="Views\Hotel\Create.cshtml" />
-    <Content Include="Views\Hotel\Delete.cshtml" />
-    <Content Include="Views\Hotel\Details.cshtml" />
-    <Content Include="Views\Hotel\Edit.cshtml" />
-    <Content Include="Views\Hotel\Index.cshtml" />
     <Content Include="Views\Account\CaNhan.cshtml" />
     <Content Include="Views\Account\DangKy02.cshtml" />
     <Content Include="Views\Shared\PartialLogin.cshtml" />
@@ -343,6 +343,17 @@
     <Content Include="Views\Account\DangKy.cshtml" />
     <Content Include="Views\Account\ChinhSuaThongTin.cshtml" />
     <Content Include="Views\Account\ChinhSua.cshtml" />
+    <Content Include="Views\ListHotels\Create.cshtml" />
+    <Content Include="Views\ListHotels\Delete.cshtml" />
+    <Content Include="Views\ListHotels\Details.cshtml" />
+    <Content Include="Views\ListHotels\Edit.cshtml" />
+    <Content Include="Views\ListHotels\Index.cshtml" />
+    <Content Include="Views\LoaiPhongs\Create.cshtml" />
+    <Content Include="Views\LoaiPhongs\Delete.cshtml" />
+    <Content Include="Views\LoaiPhongs\Details.cshtml" />
+    <Content Include="Views\LoaiPhongs\Edit.cshtml" />
+    <Content Include="Views\LoaiPhongs\Index.cshtml" />
+    <Content Include="Views\Home\ListHotels.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

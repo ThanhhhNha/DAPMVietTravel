@@ -1,0 +1,268 @@
+﻿@model IEnumerable<VietTravel.Models.Hotel>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<html>
+
+<body>
+    <div class="containerhotel">
+      
+        <div class="search-info">
+            <div>
+                <i class="fas fa-map-marker-alt"></i>
+                Phú Quốc
+            </div>
+            <div>
+                <i class="fas fa-calendar-alt"></i>
+                17-10-2024 - 18-10-2024
+            </div>
+            <div>
+                <i class="fas fa-bed"></i>
+                1 Phòng
+            </div>
+            <div>
+                <i class="fas fa-user"></i>
+                1 người lớn, 0 trẻ em
+            </div>
+            <button>Đổi nội dung</button>
+        </div>
+
+        <div class="filter-section">
+            <div class="filters">
+                <h3>BỘ LỌC TÌM KIẾM</h3>
+                <button>Tất cả</button>
+                <button>Khách sạn</button>
+                <button>Biệt thự tư nhân</button>
+                <h3>Xếp hạng sao:</h3>
+                <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star inactive"></i>
+                </div>
+                <button>Xóa</button>
+                <h3>Ngân sách:</h3>
+                <div class="budget">
+                    <span>0 ₫</span>
+                    <span>0 ₫</span>
+                </div>
+            </div>
+
+            <div class="results">
+                <div class="sort">
+                    <span>Sắp xếp theo:</span>
+                    <select>
+                        <option>Khách sạn mới nhất</option>
+                    </select>
+                </div>
+
+                <div class="cards">
+                    @foreach (var hotel in Model)
+                    {
+                        <div class="card">
+                            <img alt="@hotel.TenKhachSan" src="~/image/hotel/@hotel.HinhAnh" height="200" />
+                            <div class="info">
+                                <h4>@hotel.TenKhachSan</h4>
+                                <p>@hotel.DiaChi</p>
+                                <p>@hotel.MoTa</p>
+                                @*<div class="stars">
+                                    @for (var i = 0; i < hotel.SoSao; i++)
+                                    {
+                                        <i class="fas fa-star"></i>
+                                    }
+                                    @for (var i = hotel.SoSao; i < 5; i++)
+                                    {
+                                        <i class="fas fa-star inactive"></i>
+                                    }*@
+                                </div>
+                                @*<div class="price">@hotel.GiaTien.ToString("N0") ₫</div>*@
+                                <button class="btnXem">Xem phòng</button>
+                            </div>
+                        @*</div>*@
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+<style>
+
+    body {
+        font-family: 'Roboto', sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f5f5f5;
+    }
+
+    .containerhotel {
+        margin-top: 100px;
+        width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .header {
+        display: flex;
+        align-items: center;
+        padding: 20px 0;
+    }
+
+        .header a {
+            text-decoration: none;
+            color: #000;
+            font-weight: 500;
+            margin-right: 20px;
+        }
+
+        .header h1 {
+            font-size: 24px;
+            color: #0056b3;
+            margin: 0;
+        }
+
+    .search-info {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 20px 0;
+    }
+
+        .search-info div {
+            display: flex;
+            align-items: center;
+        }
+
+            .search-info div i {
+                margin-right: 10px;
+            }
+
+        .search-info button .btnXem{
+            background-color: #0056b3;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+    .filter-section {
+        display: flex;
+        margin-bottom: 20px;
+    }
+
+        .filter-section .filters {
+            width: 20%;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            margin-right: 20px;
+        }
+
+            .filter-section .filters h3 {
+                font-size: 18px;
+                margin-bottom: 10px;
+            }
+
+            .filter-section .filters button {
+                background-color: #f5f5f5;
+                border: none;
+                padding: 10px;
+                border-radius: 5px;
+                cursor: pointer;
+                margin-bottom: 10px;
+                width: 100%;
+            }
+
+            .filter-section .filters .stars i {
+                color: #f5c518;
+            }
+
+                .filter-section .filters .stars i.inactive {
+                    color: #ccc;
+                }
+
+            .filter-section .filters .budget {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+        .filter-section .results {
+            width: 80%;
+        }
+
+            .filter-section .results .sort {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 20px;
+            }
+
+                .filter-section .results .sort select {
+                    padding: 10px;
+                    border-radius: 5px;
+                    border: 1px solid #ccc;
+                }
+
+            .filter-section .results .cards {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 20px;
+            }
+
+            .filter-section .results .card {
+                background-color: #fff;
+                border-radius: 8px;
+                overflow: hidden;
+                width: 30%;
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            }
+
+                .filter-section .results .card img {
+                    width: 100%;
+                    height: 200px;
+                    object-fit: cover;
+                }
+
+                .filter-section .results .card .info {
+                    padding: 15px;
+                }
+
+                    .filter-section .results .card .info h4 {
+                        font-size: 16px;
+                        margin: 0 0 10px;
+                    }
+
+                    .filter-section .results .card .info p {
+                        font-size: 14px;
+                        color: #666;
+                        margin: 0 0 10px;
+                    }
+
+                    .filter-section .results .card .info .price {
+                        font-size: 18px;
+                        color: #d9534f;
+                        font-weight: 700;
+                        margin: 0 0 10px;
+                    }
+
+                    .filter-section .results .card .info button {
+                        background-color: #0056b3;
+                        color: #fff;
+                        border: none;
+                        padding: 10px;
+                        border-radius: 5px;
+                        cursor: pointer;
+                        width: 100%;
+                    }
+</style>

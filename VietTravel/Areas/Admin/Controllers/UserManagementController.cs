@@ -21,7 +21,7 @@ namespace VietTravel.Areas.Admin.Controllers
         }
 
         // GET: Admin/UserManagement/Details/5
-        public ActionResult Details(string id)
+        public ActionResult ChiTietNguoiDung(string id)
         {
             if (id == null)
             {
@@ -59,7 +59,7 @@ namespace VietTravel.Areas.Admin.Controllers
         }
 
         // GET: Admin/UserManagement/Edit/5
-        public ActionResult Edit(string id)
+        public ActionResult ChinhSuaNguoiDung(string id)
         {
             if (id == null)
             {
@@ -73,21 +73,20 @@ namespace VietTravel.Areas.Admin.Controllers
             return View(user);
         }
 
-        // POST: Admin/UserManagement/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "MaUser,TenUser,Username,Password,Email,DienThoai")] User user)
+        public ActionResult ChinhSuaNguoiDung([Bind(Include = "MaUser,TenUser,Username,Password,Email,DienThoai")] User user)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(user).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("QuanLyNguoiDung", "UserManagement"); 
             }
             return View(user);
         }
+
 
         // GET: Admin/UserManagement/Delete/5
         public ActionResult Delete(string id)

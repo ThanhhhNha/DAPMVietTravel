@@ -57,29 +57,29 @@
         <hr />
         <div class="tablee">
             <table class="table">
-                <tr>
-                    <th>
-                        Tên đăng nhập
-                    </th>
-                    <th>
-                        Username
-                    </th>
-                    <th>
-                        Mật khẩu
-                    </th>
-                    <th>
-                        Password
-                    </th>
-                    <th>
-                        Email
-                    </th>
-                    <th>
-                        Điện thoại
-                    </th>
-                </tr>
+                    <tr>
+                        <th>
+                            Tên đăng nhập
+                        </th>
+                        <th>
+                            Username
+                        </th>
+                        <th>
+                            Mật khẩu
+                        </th>
+                        <th>
+                            Password
+                        </th>
+                        <th>
+                            Email
+                        </th>
+                        <th>
+                            Điện thoại
+                        </th>
+                    </tr>
 
                 @foreach (var item in Model)
-                {
+                 {
                     <tr>
                         <td>
                             @Html.DisplayFor(modelItem => item.TenUser)
@@ -97,10 +97,10 @@
                             @Html.DisplayFor(modelItem => item.DienThoai)
                         </td>
                         <td>
-                            <a href=" @Url.Action("Edit", "AdminUsers",  new { id = item.MaUser })" class="btn btn-primarys">
+                            <a href=" @Url.Action("ChinhSuaNguoiDung", "UserManagement",  new { id = item.MaUser })" class="btn btn-primarys">
                                 Chỉnh sửa
                             </a>
-                            <a href=" @Url.Action("Details", "AdminUsers",  new { id = item.MaUser })" class="btn btn-primarys">
+                            <a href=" @Url.Action("ChiTietNguoiDung", "UserManagement",  new { id = item.MaUser })" class="btn btn-primarys">
                                 Chi tiết
                             </a>
                             <a href=" @Url.Action("Delete", "AdminUsers",  new { id = item.MaUser })" class="btn btn-primarys">
@@ -109,7 +109,7 @@
 
                         </td>
                     </tr>
-                }
+                 }
 
             </table>
 
@@ -117,12 +117,12 @@
         </div>
         <div class="form-group" style="display: flex; margin-top: 30px;">
             <div class="col-md-offset-2 col-md-6">
-                <a href=" @Url.Action("Index", "AdminProducts")" class="btn btn-primarys">
+                <a href=" @Url.Action("AdminTrangChu", "Account")" class="btn btn-primarys">
                     Quay lại
                 </a>
             </div>
             <div class="col-md-offset-2 col-md-6" style="display: flex;justify-content: flex-end">
-                <a href=" @Url.Action("Create", "AdminUsers")" class="btn btn-primarys">
+                <a href=" @Url.Action("Create", "AdminUsers")" class="btn btn-primarys" style="width:auto;">
                     Thêm tài khoản
                 </a>
             </div>

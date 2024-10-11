@@ -1,0 +1,93 @@
+﻿@model VietTravel.Models.User
+
+@{
+    ViewBag.Title = "Thông Tin Người Dùng";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+</head>
+<body>
+    <style>
+        .form1 {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .btn-primarys {
+            background-color: #154583;
+            color: #fff;
+        }
+
+            .btn-primarys:hover {
+                color: #f5f5f5;
+                background-color: #6f6f6f;
+                cursor: pointer;
+            }
+
+            .btn-primarys:hover {
+                color: #f5f5f5;
+                background-color: #6f6f6f;
+                cursor: pointer;
+            }
+
+        .form-group {
+            margin: 15px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+    </style>
+    
+    <div class="container" style="margin-top: 45px; margin-bottom: 290px">
+        <h4 style="text-align: center; font-size: 30px; text-transform: uppercase">Thông tin người dùng</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <div class="form1" style="margin-top: 30px">
+                <dt>Họ và tên:</dt>
+                <dd class="form-control" style="width: 85%; padding: 8px 15px; cursor: no-drop; ">@Html.DisplayFor(model => model.TenUser)</dd>
+            </div>
+            <div class="form1">
+                <dt>Username:</dt>
+                <dd class="form-control" style="width: 85%; padding: 8px 15px; cursor: no-drop; "> @Html.DisplayFor(model => model.Username)</dd>
+            </div>
+            <div class="form1">
+                <dt> Email:</dt>
+                <dd class="form-control" style="width: 85%; padding: 8px 15px; cursor: no-drop; "> @Html.DisplayFor(model => model.Email)</dd>
+            </div>
+            <div class="form1">
+                <dt> Số điện thoại:</dt>
+                <dd class="form-control" style="width: 85%; padding: 8px 15px; cursor: no-drop; "> @Html.DisplayFor(model => model.DienThoai)</dd>
+            </div>
+            <div class="form1">
+                <dt> Mật khẩu:</dt>
+                <dd class="form-control" style="width: 85%; padding: 8px 15px; cursor: no-drop; "> @Html.DisplayFor(model => model.Password)</dd>
+            </div>
+
+        </dl>
+        <div class="form-group" style="display: flex; margin-top: 30px;">
+            <div class="col-md-offset-2 col-md-6">
+                <a href=" @Url.Action("QuanLyNguoiDung", "UserManagement")" class="btn btn-primarys">
+                    Quay lại
+                </a>
+
+            </div>
+            <div class="col-md-offset-2 col-md-6" style="display: flex;justify-content: flex-end">
+                <a href=" @Url.Action("ChinhSuaNguoiDung", "UserManagement",new { id = Model.MaUser })" class="btn btn-primarys">
+                    Chỉnh sửa
+                </a>
+            </div>
+        </div>
+
+    </div>
+
+    <footer class="" style="background-color: #e6e3de; padding: 50px 0"></footer>
+</body>
+</html>

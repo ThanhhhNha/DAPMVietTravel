@@ -25,6 +25,12 @@ public class RouteConfig
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
+            routes.MapRoute(
+                name: "ListHotels",
+                url: "ListHotels/ListHotels={location}",
+                defaults: new { controller = "ListHotels", action = "ListHotels" }
+            );
+
     }
 }
 

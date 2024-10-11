@@ -10,17 +10,36 @@ using VietTravel.Models;
 
 namespace VietTravel.Controllers
 {
-    public class HotelController : Controller
+    public class LoaiPhongsController : Controller
     {
         private TravelVNEntities db = new TravelVNEntities();
-
-        // GET: Hotel
-        public ActionResult Index()
+        [HttpGet]
+        public JsonResult GetLoaiPhong(string searchTerm)
         {
-            return View(db.LoaiPhongs.ToList());
+            var loaiphongs = db.LoaiPhongs
+                                .Where(lp => lp.TenLoai.Contains(searchTerm) || string.IsNullOrEmpty(searchTerm))
+                                .Select(lp => new
+                                {
+                                    lp.MaLoai,
+                                    lp.TenLoai
+                                })
+                                .ToList();
+
+            return Json(loaiphongs, JsonRequestBehavior.AllowGet);
         }
 
-        // GET: Hotel/Details/5
+        // GET: LoaiPhongs
+        public ActionResult Index()
+        {
+            var loaiPhongs = db.LoaiPhongs.ToList();
+
+            ViewBag.LoaiPhongs = new SelectList(loaiPhongs, "MaLoai", "TenLoai");
+
+            return View();
+        }
+
+
+        // GET: LoaiPhongs/Details/5
         public ActionResult Details(string id)
         {
             if (id == null)
@@ -35,13 +54,13 @@ namespace VietTravel.Controllers
             return View(loaiPhong);
         }
 
-        // GET: Hotel/Create
+        // GET: LoaiPhongs/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Hotel/Create
+        // POST: LoaiPhongs/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -58,7 +77,7 @@ namespace VietTravel.Controllers
             return View(loaiPhong);
         }
 
-        // GET: Hotel/Edit/5
+        // GET: LoaiPhongs/Edit/5
         public ActionResult Edit(string id)
         {
             if (id == null)
@@ -73,7 +92,7 @@ namespace VietTravel.Controllers
             return View(loaiPhong);
         }
 
-        // POST: Hotel/Edit/5
+        // POST: LoaiPhongs/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -89,7 +108,7 @@ namespace VietTravel.Controllers
             return View(loaiPhong);
         }
 
-        // GET: Hotel/Delete/5
+        // GET: LoaiPhongs/Delete/5
         public ActionResult Delete(string id)
         {
             if (id == null)
@@ -104,7 +123,7 @@ namespace VietTravel.Controllers
             return View(loaiPhong);
         }
 
-        // POST: Hotel/Delete/5
+        // POST: LoaiPhongs/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
