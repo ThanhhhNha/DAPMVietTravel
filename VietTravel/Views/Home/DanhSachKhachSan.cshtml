@@ -12,13 +12,14 @@
     <div class="containerhotel">
 
         <div class="search-info">
+            <h3>BỘ LỌC TÌM KIẾM</h3>
             <div>
                 <i class="fas fa-map-marker-alt"></i>
-                Phú Quốc
+                @ViewBag.ProvinceName
             </div>
             <div>
                 <i class="fas fa-calendar-alt"></i>
-                17-10-2024 - 18-10-2024
+                @ViewBag.CheckIn - @ViewBag.CheckOut
             </div>
             <div>
                 <i class="fas fa-bed"></i>
@@ -28,11 +29,40 @@
                 <i class="fas fa-user"></i>
                 1 người lớn, 0 trẻ em
             </div>
-            <button>Đổi nội dung</button>
+            <button class="change-content-btn" id="change-content-btn">Đổi nội dung</button>
         </div>
-
+        <div id="change-content-modal" style="display: none;">
+            <div class="modal-content">
+                <span class="close" id="close-modal">&times;</span>
+                <h2>Thay đổi thông tin tìm kiếm</h2>
+                <form id="change-content-form" action="/Home/Search" method="get" style="margin-top:10px">
+                    <div>
+                        <label for="hotel-location">Địa điểm *</label>
+                        <select id="hotel-location" name="MaTinh" required>
+                            <option value="">Chọn tỉnh thành</option>
+                            @if (ViewBag.TinhList != null)
+                            {
+                                foreach (var tinh in ViewBag.TinhList)
+                                {
+                                    <option value="@tinh.MaTinh" @(tinh.MaTinh == ViewBag.SelectedMaTinh ? "selected" : "")>@tinh.TenTinh</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                    <div>
+                        <label for="check-in">Nhận phòng</label>
+                        <input type="date" id="check-in" name="checkIn" value="@ViewBag.CheckIn" required>
+                    </div>
+                    <div>
+                        <label for="check-out">Trả phòng</label>
+                        <input type="date" id="check-out" name="checkOut" value="@ViewBag.CheckOut" required>
+                    </div>
+                    <button type="submit">Xác nhận</button>
+                </form>
+            </div>
+        </div>
         <div class="filter-section">
-            <div class="filters">
+            @*<div class="filters">
                 <h3>BỘ LỌC TÌM KIẾM</h3>
                 <button>Tất cả</button>
                 <button>Khách sạn</button>
@@ -51,15 +81,15 @@
                     <span>0 ₫</span>
                     <span>0 ₫</span>
                 </div>
-            </div>
+            </div>*@
 
             <div class="results">
-                <div class="sort">
+                @*<div class="sort">
                     <span>Sắp xếp theo:</span>
                     <select>
-                        <option>Khách sạn mới nhất</option>
+                        <option style="width:auto">Khách sạn mới nhất</option>
                     </select>
-                </div>
+                </div>*@
                 <div class="cards">
                     @foreach (var hotel in Model)
                     {
@@ -80,13 +110,26 @@
     </div>
 </body>
 </html>
+<script>
+    document.getElementById("change-content-btn").onclick = function() {
+        document.getElementById("change-content-modal").style.display = "block";
+    };
+
+    document.getElementById("close-modal").onclick = function() {
+        document.getElementById("change-content-modal").style.display = "none";
+    };
+
+    window.onclick = function(event) {
+        if (event.target == document.getElementById("change-content-modal")) {
+            document.getElementById("change-content-modal").style.display = "none";
+        }
+    };
+</script>
 
 <style>
 
     body {
         font-family: 'Roboto', sans-serif;
-        margin: 0;
-        padding: 0;
         background-color: #f5f5f5;
     }
 
@@ -96,25 +139,6 @@
         margin-left: auto;
         margin-right: auto;
     }
-
-    .header {
-        display: flex;
-        align-items: center;
-        padding: 20px 0;
-    }
-
-        .header a {
-            text-decoration: none;
-            color: #000;
-            font-weight: 500;
-            margin-right: 20px;
-        }
-
-        .header h1 {
-            font-size: 24px;
-            color: #0056b3;
-            margin: 0;
-        }
 
     .search-info {
         background-color: #fff;
@@ -258,4 +282,90 @@
                         cursor: pointer;
                         width: 100%;
                     }
+    .change-content-btn{
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .change-content-btn:hover {
+        background-color: #005b9f;
+    }
+
+    #change-content-modal {
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.5);
+        transition: background-color 0.3s;
+        display: none;
+    }
+
+    .modal-content {
+        background-color: #fefefe;
+        margin: 15% auto;
+        padding: 20px 30px;
+        border-radius: 10px;
+        max-width: 80%;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .close {
+        color: #aaa;
+        float: right;
+        font-size: 20px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+        }
+
+    input[type="date"],
+    select {
+        width: 100%; 
+        padding: 10px;
+        margin-top: 5px; 
+        margin-bottom: 15px; 
+        border: 1px solid #ccc; 
+        border-radius: 5px; 
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); 
+        font-size: 16px;
+        transition: border-color 0.3s; 
+    }
+
+        input[type="date"]:focus,
+        select:focus {
+            border-color: #007BFF; 
+            outline: none; 
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); 
+        }
+
+    
+    button[type="submit"] {
+        background-color: #007BFF; 
+        color: white; 
+        border: none; 
+        padding: 10px 15px; 
+        border-radius: 5px;
+        cursor: pointer; 
+        font-size: 16px; 
+        transition: background-color 0.3s; 
+    }
+
+
+        button[type="submit"]:hover {
+            background-color: #0056b3; 
+        }
+
 </style>

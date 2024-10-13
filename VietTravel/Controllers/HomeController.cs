@@ -29,18 +29,32 @@ namespace VietTravel.Controllers
         }
 
 
-        public ActionResult Search(string MaTinh)
+        public ActionResult Search(string MaTinh, DateTime? checkIn, DateTime? checkOut)
         {
-            if (MaTinh == null)
-            {
-                return View("Error", new { message = "Vui lòng chọn tỉnh thành." });
-            }
+            
+            var tinhList = db.TinhThanhs.ToList();
+            ViewBag.TinhList = tinhList;
 
-            // Lấy danh sách khách sạn theo mã tỉnh thành
-            var hotels = GetHotelsByMaTinh(MaTinh);
+            
+            var selectedProvince = db.TinhThanhs.FirstOrDefault(t => t.MaTinh == MaTinh);
+            ViewBag.SelectedMaTinh = MaTinh; 
+            ViewBag.ProvinceName = selectedProvince != null ? selectedProvince.TenTinh : "Chưa chọn tỉnh";
 
-            return View("DanhSachKhachSan", hotels);  // Hiển thị danh sách khách sạn
+
+            ViewBag.CheckIn = checkIn?.ToString("yyyy-MM-dd") ?? string.Empty; 
+            ViewBag.CheckOut = checkOut?.ToString("yyyy-MM-dd") ?? string.Empty;
+
+
+            var hotels = db.Hotels
+                           .Where(h => h.MaTinh == MaTinh)
+                           .ToList();
+
+            return View("DanhSachKhachSan", hotels);
         }
+
+
+
+
 
         public IEnumerable<Hotel> GetHotelsByMaTinh(string MaTinh)
         {
@@ -56,7 +70,7 @@ namespace VietTravel.Controllers
             }
             base.Dispose(disposing);
         }
-        public ActionResult ChiTietKhachSan(string id)
+        public ActionResult ChiTietKhachSan(string id, DateTime? checkIn, DateTime? checkOut)
         {
             if (id == null)
             {
@@ -73,9 +87,9 @@ namespace VietTravel.Controllers
             {
                 return HttpNotFound();
             }
-
+            ViewBag.CheckIn = checkIn?.ToString("yyyy-MM-dd") ?? string.Empty;
+            ViewBag.CheckOut = checkOut?.ToString("yyyy-MM-dd") ?? string.Empty;
             return View(hotel);
         }
-
     }
 }

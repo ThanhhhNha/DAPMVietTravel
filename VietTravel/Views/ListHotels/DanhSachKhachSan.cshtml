@@ -12,7 +12,7 @@
     <div class="containerhotel">
       
         <div class="search-info">
-            <div>
+            @*<div>
                 <i class="fas fa-map-marker-alt"></i>
                 Phú Quốc
             </div>
@@ -28,7 +28,7 @@
                 <i class="fas fa-user"></i>
                 1 người lớn, 0 trẻ em
             </div>
-            <button>Đổi nội dung</button>
+            <button>Đổi nội dung</button>*@
         </div>
 
         <div class="filter-section">
@@ -55,10 +55,10 @@
 
             <div class="results">
                 <div class="sort">
-                    <span>Sắp xếp theo:</span>
+                    @*<span>Sắp xếp theo:</span>
                     <select>
                         <option>Khách sạn mới nhất</option>
-                    </select>
+                    </select>*@
                 </div>
                 <div class="cards">
                     @foreach (var hotel in Model)
@@ -85,13 +85,10 @@
 
     body {
         font-family: 'Roboto', sans-serif;
-        margin: 0;
-        padding: 0;
         background-color: #f5f5f5;
     }
 
     .containerhotel {
-        margin-top: 100px;
         width: 90%;
         margin-left: auto;
         margin-right: auto;
