@@ -1,0 +1,534 @@
+﻿@model VietTravel.Models.Hotel
+
+@{
+    ViewBag.Title = "ChiTietKhachSan";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<html>
+<head>
+    <title>@Model.TenKhachSan</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+
+</head>
+<body>
+    <div class="container" style="margin-top:100px;">
+        <div class="breadcrumb">
+            <a href="#">Khách sạn</a> / <a href="#">@Model.TinhThanh.TenTinh</a> / Đặt phòng khách sạn @Model.TenKhachSan
+        </div>
+
+        <div class="hotel-images">
+            <img src="~/image/hotel/@Model.HinhAnh" alt="Hotel image" />
+
+        </div>
+
+        <div class="booking-box">
+            <h3>Thông tin đặt phòng</h3>
+            <p>Chọn ngày lưu trú:</p>
+
+            <div>
+                <label for="checkinDate">Ngày đến:</label>
+                <input type="date" id="checkinDate" onchange="updateTotalPrice()" />
+            </div>
+
+            <div>
+                <label for="checkoutDate">Ngày đi:</label>
+                <input type="date" id="checkoutDate" onchange="updateTotalPrice()" />
+            </div>
+
+            <p>@Model.TenKhachSan</p>
+            <p id="stayDuration"></p>
+
+            <div class="button-section">
+                <label for="roomQuantity">Số lượng:</label>
+                <input type="number" id="roomQuantity" min="1" value="1" onchange="updateTotalPrice()" />
+            </div>
+            <p class="total-price" id="totalPrice">Tổng cộng: 0 ₫</p>
+            <div class="button-section">
+                <button>Đặt phòng</button>
+            </div>
+        </div>
+
+
+        <div class="section-title">GIỚI THIỆU</div>
+        <div class="description">
+            <p>@Model.MoTa</p>
+        </div>
+
+
+        <div class="section-title">
+            TIỆN NGHI CHỖ Ở
+        </div>
+        <div class="amenities">
+            <div>
+                <i class="fas fa-check">
+                </i>
+                <p>
+                    Tiếng Anh
+                </p>
+            </div>
+            <div>
+                <i class="fas fa-check">
+                </i>
+                <p>
+                    Trung Quốc (Quan Thoại)
+                </p>
+            </div>
+            <div>
+                <i class="fas fa-check">
+                </i>
+                <p>
+                    Wi-Fi miễn phí trong tất cả các phòng
+                </p>
+            </div>
+            <div>
+                <i class="fas fa-check">
+                </i>
+                <p>
+                    Internet
+                </p>
+            </div>
+            <div>
+                <i class="fas fa-check">
+                </i>
+                <p>
+                    Cửa hàng tiện lợi
+                </p>
+            </div>
+            <div>
+                <i class="fas fa-check">
+                </i>
+                <p>
+                    Két sắt
+                </p>
+            </div>
+            <div>
+                <i class="fas fa-check">
+                </i>
+                <p>
+                    Tiệm làm đẹp
+                </p>
+            </div>
+        </div>
+        <div class="section-title">
+
+            <div class="section-title">DANH SÁCH PHÒNG</div>
+            <div class="room-list">
+                @foreach (var room in Model.Phongs)
+                {
+
+                    <div class="image-section">
+                        <div class="thumbnail-section">
+                            <img src="~/image/phong/@room.Hinh" alt="Room image" />
+                        </div>
+                    </div>
+                    <div class="details-section">
+                        <h4>@room.LoaiPhong.TenLoai</h4>
+                        <div class="icons">
+                            <span>
+                                <i class="fas fa-user">
+                                </i>
+                                1 người
+                            </span>
+                            <span>
+                                <i class="fas fa-expand-arrows-alt">
+                                </i>
+                                33m
+                                <sup>
+                                    2
+                                </sup>
+                            </span>
+                            <span>
+                                <i class="fas fa-bed">
+                                </i>
+                                2 giường đơn
+                            </span>
+                        </div>
+                        <div class="amenities">
+                            <p>
+                                Nước uống chào đón
+                            </p>
+                            <p>
+                                WiFi miễn phí
+                            </p>
+                        </div>
+                        <div class="price">
+                            <p>@room.Gia.ToString("N0", System.Globalization.CultureInfo.InvariantCulture) ₫/1 đêm</p>
+                        </div>
+                        <div class="button-section">
+                            <button data-gia="@room.Gia" data-loai="@room.LoaiPhong.TenLoai" onclick="selectRoom(this)">Chọn phòng</button>
+                        </div>
+
+                    </div>
+                }
+
+
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+<script>
+        let selectedRoomPrice = 0;
+
+        function selectRoom(button) {
+            selectedRoomPrice = parseFloat(button.getAttribute('data-gia'));
+        const roomType = button.getAttribute('data-loai');
+
+        document.getElementById("stayDuration").innerText = `Phòng: ${roomType}`;
+
+        updateTotalPrice();
+    }
+
+    function updateTotalPrice() {
+        const checkinDate = new Date(document.getElementById("checkinDate").value);
+        const checkoutDate = new Date(document.getElementById("checkoutDate").value);
+        const roomQuantity = parseInt(document.getElementById("roomQuantity").value) || 1;
+
+        if (checkinDate && checkoutDate && checkoutDate > checkinDate) {
+            const duration = Math.floor((checkoutDate - checkinDate) / (1000 * 60 * 60 * 24));
+            const totalPrice = selectedRoomPrice * duration * roomQuantity;
+
+            document.getElementById("totalPrice").innerText = `Tổng cộng: ${totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} ₫`;
+        } else {
+            document.getElementById("totalPrice").innerText = `Tổng cộng: 0 ₫`;
+        }
+    }
+    function selectRoom(button) {
+        const checkinDate = document.getElementById("checkinDate").value;
+        const checkoutDate = document.getElementById("checkoutDate").value;
+
+        if (!checkinDate || !checkoutDate) {
+            alert("Vui lòng chọn cả ngày đến và ngày đi.");
+            return;
+        }
+
+        selectedRoomPrice = parseFloat(button.getAttribute('data-gia'));
+        const roomType = button.getAttribute('data-loai');
+        document.getElementById("stayDuration").innerText = `Phòng: ${roomType}`;
+
+        updateTotalPrice();
+    }
+
+
+</script>
+
+
+<style>
+    body {
+        font-family: 'Roboto', sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f5f5f5;
+    }
+
+    .container {
+        width: 80%;
+        margin: 0 auto;
+        background-color: #fff;
+        padding: 20px;
+    }
+
+    .breadcrumb {
+        font-size: 16px;
+        color: #666;
+    }
+
+        .breadcrumb a {
+            color: #0071c2;
+            text-decoration: none;
+        }
+
+            .breadcrumb a:hover {
+                text-decoration: underline;
+            }
+
+    .hotel-title {
+        font-size: 24px;
+        font-weight: bold;
+        color: #333;
+    }
+
+    .hotel-rating {
+        color: #f9a825;
+    }
+
+    .hotel-images {
+        display: flex;
+        margin-top: 20px;
+        justify-content: center;
+    }
+
+        .hotel-images img {
+            width: 600px;
+            height: auto;
+            margin-right: 10px;
+        }
+
+    .booking-box {
+        border: 1px solid #ddd;
+        padding: 20px;
+        background-color: #f1f1f1;
+        margin-top: 20px;
+    }
+
+        .booking-box h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .booking-box p {
+            margin: 10px 0;
+        }
+
+        .booking-box .total-price {
+            font-size: 25px;
+            font-weight: bold;
+            color: #d32f2f;
+        }
+
+        .booking-box button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+            .booking-box button:hover {
+                background-color: #005b9f;
+            }
+
+    .section-title {
+        font-size: 20px;
+        font-weight: bold;
+        margin-top: 30px;
+        margin-bottom: 10px;
+    }
+
+    .description, .location {
+        margin-top: 20px;
+    }
+
+        .description p {
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .location img {
+            width: 100%;
+            height: auto;
+        }
+
+    .rating {
+        font-size: 16px;
+        font-weight: bold;
+        color: #333;
+        margin-top: 10px;
+    }
+
+    .amenities {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 20px;
+        padding: 20px;
+        border: 1px solid #ddd;
+        background-color: #f1f1f1;
+    }
+
+        .amenities div {
+            text-align: center;
+        }
+
+        .amenities i {
+            color: #0071c2;
+            font-size: 20px;
+        }
+
+    .room-list {
+        margin-top: 20px;
+        border: solid 1px;
+        display: flex;
+        border: 10px;
+    }
+
+    .room-item {
+        display: flex;
+        justify-content: space-between;
+        padding: 20px;
+        border: 1px solid #ddd;
+        background-color: #fff;
+        margin-bottom: 10px;
+    }
+
+        .room-item img {
+            width: 150px;
+            height: auto;
+            margin-right: 20px;
+        }
+
+    .room-details {
+        flex-grow: 1;
+    }
+
+        .room-details h4 {
+            font-size: 18px;
+            margin: 0;
+        }
+
+        .room-details p {
+            margin: 5px 0;
+        }
+
+    .room-price {
+        text-align: right;
+    }
+
+        .room-price p {
+            font-size: 16px;
+            font-weight: bold;
+            color: #d32f2f;
+        }
+
+        .room-price button {
+            background-color: #d32f2f;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+
+            .room-price button:hover {
+                background-color: #b71c1c;
+            }
+
+    .image-section {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+        .image-section img {
+            width: 100%;
+            border-radius: 10px;
+        }
+
+    .thumbnail-section {
+        display: flex;
+        margin-top: 10px;
+    }
+
+        .thumbnail-section img {
+            width: 300px;
+            height: 180px;
+            margin-right: 5px;
+            border-radius: 5px;
+        }
+
+    .details-section {
+        flex: 2;
+        padding-left: 20px;
+    }
+
+        .details-section h2 {
+            margin: 0;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .details-section .icons {
+            margin: 10px 0;
+            display: flex;
+            align-items: center;
+        }
+
+            .details-section .icons i {
+                margin-right: 5px;
+            }
+
+            .details-section .icons span {
+                margin-right: 15px;
+                font-size: 14px;
+            }
+
+        .details-section .amenities {
+            margin: 10px 0;
+            font-size: 14px;
+        }
+
+        .details-section .price {
+            color: red;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .details-section .button-section {
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+            .details-section .button-section button {
+                background-color: #007bff;
+                color: #fff;
+                border: none;
+                padding: 10px 20px;
+                border-radius: 5px;
+                cursor: pointer;
+                font-size: 14px;
+            }
+
+                .details-section .button-section button:hover {
+                    background-color: #005b9f;
+                }
+
+            .details-section .button-section a {
+                margin-left: 10px;
+                color: #007bff;
+                font-size: 12px;
+                text-decoration: none;
+            }
+
+            .details-section .button-section button:hover {
+                background-color: #005b9f;
+                transform: scale(1.05);
+                transition: background-color 0.3s, transform 0.3s;
+            }
+
+    .booking-box input[type="date"],
+    .booking-box input[type="number"] {
+        width: calc(50% - 10px);
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 16px;
+        margin-right: 10px;
+        transition: border-color 0.3s;
+    }
+
+    .booking-box input[type="date"] {
+        margin-top: 10px;
+    }
+
+        .booking-box input[type="date"]:focus,
+        .booking-box input[type="number"]:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+
+    .button-section {
+        display: flex;
+        align-items: center;
+        margin-top: 10px;
+    }
+
+        .button-section label {
+            margin-right: 10px;
+        }
+
+        .button-section input[type="number"] {
+            width: 60px;
+        }
+</style>

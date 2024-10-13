@@ -25,26 +25,34 @@ namespace VietTravel.Controllers
 
 
         // GET: ListHotels
-        public ActionResult Index()
+        public ActionResult DanhSachKhachSan()
         {
             var hotels = db.Hotels.Include(h => h.TinhThanh);
             return View(hotels.ToList());
         }
 
         // GET: ListHotels/Details/5
-        public ActionResult Details(string id)
+        public ActionResult ChiTietKhachSan(string id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Hotel hotel = db.Hotels.Find(id);
+
+           
+            Hotel hotel = db.Hotels
+                            .Include(h => h.Phongs.Select(p => p.LoaiPhong))
+                            .Include(h => h.Phongs.Select(p => p.TrangThaiPhong))
+                            .FirstOrDefault(h => h.MaKhachSan == id);
+
             if (hotel == null)
             {
                 return HttpNotFound();
             }
+
             return View(hotel);
         }
+
 
         // GET: ListHotels/Create
         public ActionResult Create()

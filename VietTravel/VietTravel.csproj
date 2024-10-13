@@ -258,10 +258,18 @@
     <Content Include="image\hotel\hotelC.jpg" />
     <Content Include="image\hotel\hotelD.jpg" />
     <Content Include="image\hotel\hotelE.jpg" />
+    <Content Include="image\hotel\hotelF.jpg" />
+    <Content Include="image\hotel\hotelG.jpg" />
+    <Content Include="image\hotel\hotelH.jpg" />
+    <Content Include="image\hotel\hotelI.jpg" />
+    <Content Include="image\hotel\hotelJ.jpg" />
+    <Content Include="image\hotel\hotelK.jpg" />
     <Content Include="image\internet.png" />
     <Content Include="image\logo.jpg" />
     <Content Include="image\logo01.png" />
     <Content Include="image\paypal.png" />
+    <Content Include="image\phong\room1.jpg" />
+    <Content Include="image\phong\room2.jpg" />
     <Content Include="image\phuquoc.jpg" />
     <Content Include="image\quynhon.jpg" />
     <Content Include="image\visa.png" />
@@ -347,13 +355,15 @@
     <Content Include="Views\ListHotels\Delete.cshtml" />
     <Content Include="Views\ListHotels\Details.cshtml" />
     <Content Include="Views\ListHotels\Edit.cshtml" />
-    <Content Include="Views\ListHotels\Index.cshtml" />
+    <Content Include="Views\ListHotels\DanhSachKhachSan.cshtml" />
     <Content Include="Views\LoaiPhongs\Create.cshtml" />
     <Content Include="Views\LoaiPhongs\Delete.cshtml" />
     <Content Include="Views\LoaiPhongs\Details.cshtml" />
     <Content Include="Views\LoaiPhongs\Edit.cshtml" />
     <Content Include="Views\LoaiPhongs\Index.cshtml" />
-    <Content Include="Views\Home\ListHotels.cshtml" />
+    <Content Include="Views\Home\DanhSachKhachSan.cshtml" />
+    <Content Include="Views\ListHotels\ChiTietKhachSan.cshtml" />
+    <Content Include="Views\Home\ChiTietKhachSan.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

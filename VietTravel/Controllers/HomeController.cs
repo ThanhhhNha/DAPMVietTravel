@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using VietTravel.Models;
@@ -38,7 +39,7 @@ namespace VietTravel.Controllers
             // Lấy danh sách khách sạn theo mã tỉnh thành
             var hotels = GetHotelsByMaTinh(MaTinh);
 
-            return View("ListHotels", hotels);  // Hiển thị danh sách khách sạn
+            return View("DanhSachKhachSan", hotels);  // Hiển thị danh sách khách sạn
         }
 
         public IEnumerable<Hotel> GetHotelsByMaTinh(string MaTinh)
@@ -55,5 +56,26 @@ namespace VietTravel.Controllers
             }
             base.Dispose(disposing);
         }
+        public ActionResult ChiTietKhachSan(string id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+
+            Hotel hotel = db.Hotels
+                 .Include("Phongs.LoaiPhong")
+                 .Include("Phongs.TrangThaiPhong")
+                 .FirstOrDefault(h => h.MaKhachSan == id);
+
+            if (hotel == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(hotel);
+        }
+
     }
 }

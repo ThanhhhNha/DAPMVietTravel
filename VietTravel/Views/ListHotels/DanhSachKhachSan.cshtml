@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<VietTravel.Models.Hotel>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Danh Sách Khách Sạn";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -60,32 +60,21 @@
                         <option>Khách sạn mới nhất</option>
                     </select>
                 </div>
-
                 <div class="cards">
                     @foreach (var hotel in Model)
                     {
-                        <div class="card">
+                        <a href="@Url.Action("ChiTietKhachSan", "ListHotels", new { id = hotel.MaKhachSan })" class="card" style="text-decoration-line: none;">
                             <img alt="@hotel.TenKhachSan" src="~/image/hotel/@hotel.HinhAnh" height="200" />
                             <div class="info">
                                 <h4>@hotel.TenKhachSan</h4>
                                 <p>@hotel.DiaChi</p>
                                 <p>@hotel.MoTa</p>
-                                @*<div class="stars">
-                                    @for (var i = 0; i < hotel.SoSao; i++)
-                                    {
-                                        <i class="fas fa-star"></i>
-                                    }
-                                    @for (var i = hotel.SoSao; i < 5; i++)
-                                    {
-                                        <i class="fas fa-star inactive"></i>
-                                    }*@
-                                </div>
-                                @*<div class="price">@hotel.GiaTien.ToString("N0") ₫</div>*@
-                                <button class="btnXem">Xem phòng</button>
+
                             </div>
-                        @*</div>*@
+                        </a>
                     }
                 </div>
+
             </div>
         </div>
     </div>
@@ -239,11 +228,15 @@
                 }
 
                     .filter-section .results .card .info h4 {
+                        color: #333;
+                        text-decoration: none;
                         font-size: 16px;
                         margin: 0 0 10px;
                     }
 
                     .filter-section .results .card .info p {
+                        text-decoration: none;
+                        color: #555;
                         font-size: 14px;
                         color: #666;
                         margin: 0 0 10px;

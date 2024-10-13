@@ -58,7 +58,7 @@
        
         <div class="tab-content" id="tab-hotel">
             <div class="search-options">
-                <form action="/Home/Search" method="get">
+                <form action="/Home/Search" method="get" style=" display: flex; flex: 1;">
                     <div class="search-input">
                         <label for="hotel-location">Địa điểm *</label>
                         <select id="hotel-location" name="MaTinh" required>
@@ -295,7 +295,7 @@
             display: block;
         }
 
-    .search-input, .search-options {
+    .search-options {
         margin-bottom: 20px;
     }
 
@@ -326,6 +326,7 @@
         border: none;
         border-radius: 5px;
         cursor: pointer;
+        width: 30px; important!
     }
 
         .search-button:hover {
