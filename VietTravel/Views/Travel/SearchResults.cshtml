@@ -1,0 +1,38 @@
+﻿@model IEnumerable<VietTravel.Models.Tour>
+
+<h2>Kết quả tìm kiếm</h2>
+
+@if (Model == null || !Model.Any())
+{
+    <p>Không tìm thấy tour nào phù hợp với tiêu chí tìm kiếm của bạn.</p>
+}
+else
+{
+    <p>Chúng tôi đã tìm thấy @Model.Count() chương trình tour dựa trên yêu cầu của bạn:</p>
+
+    <div class="tour-list">
+        @foreach (var tour in Model)
+        {
+            <div class="tour-item">
+                <h3>@tour.TenTour</h3>
+
+                <p>
+                    <strong>Điểm khởi hành:</strong>
+                    @(tour.TinhThanh != null ? tour.TinhThanh.TenTinh : "Không xác định")
+                </p>
+
+                <p>
+                    <strong>Giá:</strong>
+                    @tour.Gia.ToString("N0") đ
+                </p>
+
+                <p>
+                    <strong>Ngày khởi hành:</strong>
+                    @tour.NgayKhoiHanh.ToString("dd/MM/yyyy")
+                </p>
+
+                <a href='@Url.Action("TourDetail", "Travel", new { id = tour.MaTour })'>Xem chi tiết</a>
+            </div>
+        }
+    </div>
+}

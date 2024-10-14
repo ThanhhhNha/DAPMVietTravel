@@ -146,6 +146,8 @@
     <Compile Include="Controllers\ListHotelsController.cs" />
     <Compile Include="Controllers\LoaiPhongsController.cs" />
     <Compile Include="Controllers\ToursController.cs" />
+    <Compile Include="Controllers\TourService.cs" />
+    <Compile Include="Controllers\TravelController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -272,6 +274,18 @@
     <Content Include="image\phong\room2.jpg" />
     <Content Include="image\phuquoc.jpg" />
     <Content Include="image\quynhon.jpg" />
+    <Content Include="image\Tour\tour1.jpg" />
+    <Content Include="image\Tour\tour2.jpg" />
+    <Content Include="image\Tour\tour3.jpg" />
+    <Content Include="image\Tour\tour4.jpg" />
+    <Content Include="image\Tour\tour5.jpg" />
+    <Content Include="image\Tour\tour6.jpg" />
+    <Content Include="image\Tour\tour7.jpg" />
+    <Content Include="image\Tour\tour8.jpg" />
+    <Content Include="image\Tour\tour9.jpg" />
+    <Content Include="image\Tour\tour10.jpg" />
+    <Content Include="image\Tour\tour11.jpg" />
+    <Content Include="image\Tour\tour12.jpg" />
     <Content Include="image\visa.png" />
     <Content Include="image\youtube.png" />
     <Content Include="Models\Model1.Context.tt">
@@ -364,6 +378,10 @@
     <Content Include="Views\Home\DanhSachKhachSan.cshtml" />
     <Content Include="Views\ListHotels\ChiTietKhachSan.cshtml" />
     <Content Include="Views\Home\ChiTietKhachSan.cshtml" />
+    <Content Include="Views\Travel\DuLichTravel.cshtml" />
+    <Content Include="Views\Travel\Search.cshtml" />
+    <Content Include="Views\Travel\SearchResults.cshtml" />
+    <Content Include="Views\Travel\TourDetail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

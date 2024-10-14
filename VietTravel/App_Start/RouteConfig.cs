@@ -30,6 +30,16 @@ public class RouteConfig
                 url: "ListHotels/ListHotels={location}",
                 defaults: new { controller = "ListHotels", action = "ListHotels" }
             );
+            routes.MapRoute(
+               name: "DuLichTravelRoute",
+               url: "dulich-travel",
+               defaults: new { controller = "Travel", action = "DuLichTravel" }
+            );
+            routes.MapRoute(
+               name: "TourDetail",
+               url: "Travel/TourDetail/{maTour}",
+               defaults: new { controller = "Travel", action = "TourDetail", maTour = UrlParameter.Optional }
+            );
 
     }
 }

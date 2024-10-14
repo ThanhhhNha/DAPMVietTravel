@@ -1,0 +1,321 @@
+﻿@{
+    ViewBag.Title = "Du Lịch Vietravel";
+}
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewBag.Title</title>
+    <link rel="stylesheet" href="~/Content/Site.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            color: #333;
+        }
+
+        header {
+            background-color: #ff9900;
+            padding: 20px 0;
+            text-align: center;
+            color: white;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .container {
+            max-width: 1300px;
+            margin: auto;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .breadcrumb-container {
+            font-size: 16px;
+            margin-bottom: 20px;
+            color: #333;
+            display: flex;
+            gap: 5px;
+        }
+
+            .breadcrumb-container a {
+                color: #007bff;
+                text-decoration: none;
+            }
+
+                .breadcrumb-container a:hover {
+                    text-decoration: underline;
+                }
+
+        .find-tour-header__title {
+            font-size: 36px;
+            font-weight: bold;
+            color: #1a202c;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        #description {
+            font-size: 18px;
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .content-wrapper {
+            display: flex;
+            gap: 20px; /* Khoảng cách giữa bộ lọc và danh sách tour */
+        }
+
+        .find-tour-content__filter {
+            width: 280px; /* Chiều rộng của bộ lọc */
+            padding: 20px;
+            background-color: #f5f5f5;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            flex-shrink: 0; /* Đảm bảo bộ lọc không bị co lại */
+        }
+
+        .tour-list {
+            flex-grow: 1; /* Để phần danh sách tour chiếm không gian còn lại */
+            display: flex;
+            flex-direction: column;
+            gap: 20px; /* Khoảng cách giữa các tour */
+        }
+
+        .card-filter-desktop {
+            display: flex;
+            background: white;
+            padding: 20px;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            align-items: center; /* Căn giữa ảnh và nội dung */
+        }
+
+        .card-filter-desktop__thumbnail img {
+            width: 250px; /* Tăng kích thước ảnh */
+            height: 180px;
+            border-radius: 10px;
+        }
+
+        .card-filter-desktop__content {
+            margin-left: 20px;
+            flex: 1;
+        }
+
+        .card-filter-desktop__content--header-title {
+            font-size: 20px; /* Tăng kích thước tiêu đề */
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .btn-primary {
+            background-color: #ff9900;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+
+            .btn-primary:hover {
+                background-color: #e68a00;
+            }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Du lịch Vietravel</h1>
+    </header>
+
+    <div class="container">
+        <section class="find-tour-header">
+            <div class="find-tour-header__container section-container">
+                <div class="breadcrumb-container">
+                    <div><a title="Điểm đến" class="normal-link">Điểm đến</a> / </div>
+                    <div><a title="Du lịch Travel" class="active-link">Du lịch Travel</a></div>
+                </div>
+                <div class="find-tour-header__title animate__fadeIn animate__animated">
+                    <h1 class="find-tour-header__title">Du lịch Travel</h1>
+                </div>
+            </div>
+        </section>
+
+        <div class="find-tour-header__container section-container">
+            <div class="breadcrumb-container">
+                <div><a title="Điểm đến" class="normal-link ">Điểm đến</a> / </div>
+                <div><a title="Du lịch trong nước" class="normal-link ">Du lịch trong nước</a></div>
+            </div>
+            <div class="find-tour-header__title animate__fadeIn animate__animated ">
+                <h1 class="find-tour-header__title">Du lịch trong nước</h1>
+                <p id="description" class="animate__fadeIn animate__animated ">Du lịch trong nước luôn là lựa chọn tuyệt vời. Đường bờ biển dài hơn 3260km, những khu bảo tồn thiên nhiên tuyệt vời, những thành phố nhộn nhịp, những di tích lịch sử hào hùng, nền văn hóa độc đáo và hấp dẫn, cùng một danh sách dài những món ăn ngon nhất thế giới, Việt Nam có tất cả những điều đó. Với lịch trình dày, khởi hành đúng thời gian cam kết, Vietravel là công ty lữ hành uy tín nhất hiện nay tại Việt Nam, luôn sẵn sàng phục vụ du khách mọi lúc, mọi nơi, đảm bảo tính chuyên nghiệp và chất lượng dịch vụ tốt nhất thị trường</p>
+            </div>
+        </div>
+
+        <div class="content-wrapper">
+            <!-- Bộ lọc tìm kiếm -->
+            <section class="find-tour-content__filter">
+                <p class="filter-sidebar-header">Bộ lọc tìm kiếm</p>
+                <form action="/Travel/SearchResults" method="GET">
+                    <div class="find-tour-content__filter--main-filter filter-section">
+                        <!-- Ngân sách -->
+                        <div class="find-tour-content__filter--main-filter--range">
+                            <div class="find-tour-content__filter--main-filter--title">
+                                <div class="find-tour-content__filter--main-filter--label">Ngân sách:</div>
+                            </div>
+                            <div class="budget-content__list budget-filter-list">
+                                <label><input type="radio" name="budget" value="Duoi5Trieu"> Dưới 5 triệu</label><br>
+                                <label><input type="radio" name="budget" value="5-10Trieu"> Từ 5 - 10 triệu</label><br>
+                                <label><input type="radio" name="budget" value="10-20Trieu"> Từ 10 - 20 triệu</label><br>
+                                <label><input type="radio" name="budget" value="Tren20Trieu"> Trên 20 triệu</label><br>
+                            </div>
+                        </div>
+                        <!-- Điểm khởi hành -->
+                        <div class="find-tour-content__filter--main-filter--option">
+                            <div class="find-tour-content__filter--main-filter--title">
+                                <label class="find-tour-content__filter--main-filter--label" for="departure">Điểm khởi hành</label>
+                            </div>
+                            <select name="departure">
+                                <option value="">Tất cả</option>
+                                <option value="TPHCM">TP. Hồ Chí Minh</option>
+                                <option value="Hue">Huế</option>
+                                <option value="QuyNhon">Quy Nhơn</option>
+                                <option value="PhuQuoc">Phú Quốc</option>
+                                <option value="LongXuyen">Long Xuyên</option>
+                                <option value="QuangNgai">Quảng Ngãi</option>
+                                <option value="VungTau">Vũng Tàu</option>
+                                <option value="QuangNinh">Quảng Ninh</option>
+                                <option value="BuonMaThuot">Buôn Ma Thuột</option>
+                                <option value="Vinh">Vinh</option>
+                                <option value="CaMau">Cà Mau</option>
+                                <option value="RachGia">Rạch Giá</option>
+                                <option value="DaLat">Đà Lạt</option>
+                                <option value="ThanhHoa">Thanh Hóa</option>
+                                <option value="HaNoi">Hà Nội</option>
+                                <option value="DaNang">Đà Nẵng</option>
+                                <option value="ThaiNguyen">Thái Nguyên</option>
+                                <option value="CanTho">Cần Thơ</option>
+                                <option value="HaiPhong">Hải Phòng</option>
+                                <option value="BinhDuong">Bình Dương</option>
+                                <option value="NhaTrang">Nha Trang</option>
+                            </select>
+                        </div>
+
+                        <!-- Điểm đến -->
+                        <div class="find-tour-content__filter--main-filter--option">
+                            <div class="find-tour-content__filter--main-filter--title">
+                                <label class="find-tour-content__filter--main-filter--label" for="destination">Điểm đến</label>
+                            </div>
+                            <select name="destination">
+                                <option value="">Tất cả</option>
+                                <option value="NinhThuan">Ninh Thuận</option>
+                                <option value="NgheAn">Nghệ An</option>
+                                <option value="PhuYen">Phú Yên</option>
+                                <option value="CaoBang">Cao Bằng</option>
+                                <option value="BacKan">Bắc Kạn</option>
+                                <option value="ThanhHoa">Thanh Hóa</option>
+                                <option value="SonLa">Sơn La</option>
+                                <option value="HaGiang">Hà Giang</option>
+                                <option value="CaMau">Cà Mau</option>
+                                <option value="QuyNhon">Quy Nhơn</option>
+                                <option value="DienBien">Điện Biên</option>
+                                <option value="BenTre">Bến Tre</option>
+                                <option value="ConDao">Côn Đảo</option>
+                                <option value="KienGiang">Kiên Giang</option>
+                                <option value="BinhThuan">Bình Thuận</option>
+                                <option value="HaTinh">Hà Tĩnh</option>
+                                <option value="QuangNinh">Quảng Ninh</option>
+                                <option value="TPHCM">TP. Hồ Chí Minh</option>
+                                <option value="QuangNgai">Quảng Ngãi</option>
+                                <option value="DongThap">Đồng Tháp</option>
+                            </select>
+                        </div>
+
+                        <!-- Ngày đi -->
+                        <div class="find-tour-content__filter--main-filter--calendar">
+                            <div class="find-tour-content__filter--main-filter--label">Ngày đi:</div>
+                            <input type="date" name="departureDate">
+                        </div>
+
+                        <!-- Dòng tour -->
+                        <div class="find-tour-content__filter--main-filter--option">
+                            <div class="find-tour-content__filter--main-filter--title">
+                                <div class="find-tour-content__filter--label">Dòng tour</div>
+                            </div>
+                            <div class="tag-container">
+                                <label><input type="checkbox" name="tourType" value="CaoCap"> Cao cấp</label><br>
+                                <label><input type="checkbox" name="tourType" value="TieuChuan"> Tiêu chuẩn</label><br>
+                                <label><input type="checkbox" name="tourType" value="TietKiem"> Tiết kiệm</label><br>
+                                <label><input type="checkbox" name="tourType" value="GiaTot"> Giá tốt</label>
+                            </div>
+                        </div>
+
+                        <!-- Phương tiện -->
+                        <div class="find-tour-content__filter--main-filter--option">
+                            <div class="find-tour-content__filter--main-filter--title">
+                                <div class="find-tour-content__filter--label">Phương tiện</div>
+                            </div>
+                            <div class="tag-container">
+                                <label><input type="checkbox" name="transport" value="Xe"> Xe</label><br>
+                                <label><input type="checkbox" name="transport" value="MayBay"> Máy bay</label>
+                            </div>
+                        </div>
+
+                        <button type="submit" aria-label="Tìm kiếm" class="btn btn-primary" style="width: 100%;">Áp dụng</button>
+                    </div>
+                </form>
+            </section>
+
+            <!-- Danh sách tour -->
+            <div class="tour-list">
+                @{
+                    int index = 0; // Khởi tạo biến đếm
+                }
+                @foreach (var tour in Model)
+                {
+                    var imageFileName = "tour" + (index + 1).ToString() + ".png"; // Gán tên ảnh dựa trên vị trí
+
+                    <div class="card-filter-desktop">
+                        <div class="card-filter-desktop__thumbnail">
+                            <!-- Thay đổi src để trỏ tới ảnh từ folder image/Tour -->
+                            <img alt="@tour.TenTour"
+                                 loading="lazy"
+                                 width="250"
+                                 height="180"
+                                 decoding="async"
+                                 src="@Url.Content("~/image/Tour/" + imageFileName)"
+                                 style="color: transparent; border-radius: 10px;" />
+                        </div>
+                        <div class="card-filter-desktop__content">
+                            <h3 class="card-filter-desktop__content--header-title">@tour.TenTour</h3>
+                            <p><strong>Mô tả:</strong> @tour.MoTa</p>
+                            <p><strong>Ngày khởi hành:</strong> @tour.NgayKhoiHanh.ToString("dd/MM/yyyy")</p>
+                            <p><strong>Số ngày:</strong> @tour.ThoiGian</p>
+                            <p><strong>Giá:</strong> @String.Format("{0:0,0 VNĐ}", tour.Gia)</p>
+                            <a href="@Url.Action("TourDetail", "Travel", new { maTour = tour.MaTour })" class="button btn-md btn-primary">Xem chi tiết</a>
+                        </div>
+                    </div>
+                    <hr />
+                    index++; // Tăng biến đếm sau mỗi vòng lặp
+                }
+            </div>
+
+
+        </div>
+    </div>
+
+
+    <footer>
+        <p>Bản quyền © 2024 Vietravel</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,39 @@
+﻿@using (Html.BeginForm("Search", "Travel", FormMethod.Post))
+{
+    <div>
+        <label>Ngân sách</label>
+        <select name="budget">
+            <option value="Duoi5Trieu">Dưới 5 triệu</option>
+            <option value="5-10Trieu">5 - 10 triệu</option>
+            <option value="10-20Trieu">10 - 20 triệu</option>
+            <option value="Tren20Trieu">Trên 20 triệu</option>
+        </select>
+    </div>
+
+    <div>
+        <label>Điểm khởi hành</label>
+        <input type="text" name="departure" />
+    </div>
+
+    <div>
+        <label>Điểm đến</label>
+        <input type="text" name="destination" />
+    </div>
+
+    <div>
+        <label>Ngày đi</label>
+        <input type="date" name="departureDate" />
+    </div>
+
+    <div>
+        <label>Dòng tour</label>
+        <input type="checkbox" name="tourType" value="CaoCap" /> Cao cấp
+        <input type="checkbox" name="tourType" value="TieuChuan" /> Tiêu chuẩn
+        <input type="checkbox" name="tourType" value="TietKiem" /> Tiết kiệm
+        <input type="checkbox" name="tourType" value="GiaTot" /> Giá tốt
+    </div>
+
+   
+
+    <input type="submit" value="Tìm kiếm" />
+}
