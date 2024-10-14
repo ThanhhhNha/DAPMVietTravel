@@ -44,9 +44,16 @@
                 <input type="number" id="roomQuantity" min="1" value="1" onchange="updateTotalPrice()" />
             </div>
             <p class="total-price" id="totalPrice">Tổng cộng: 0 ₫</p>
-            <div class="button-section">
-                <button>Đặt phòng</button>
-            </div>
+            <form id="bookingForm" action="/Booking/ChiTietDatPhong" method="get">
+                <input type="hidden" name="TenKhachSan" value="@Model.TenKhachSan" />
+                <input type="hidden" id="SelectedRoomType" name="LoaiPhong" />
+                <input type="hidden" id="SelectedRoomPrice" name="GiaPhong" />
+                <input type="hidden" id="CheckinDate" name="NgayDen" />
+                <input type="hidden" id="CheckoutDate" name="NgayDi" />
+                <input type="hidden" id="RoomQuantity" name="SoLuong" />
+
+                <button type="button" onclick="submitBookingForm()">Đặt phòng</button>
+            </form>
         </div>
 
 
@@ -210,7 +217,16 @@
         updateTotalPrice();
     }
 
+    //
+        function submitBookingForm() {
+        document.getElementById("SelectedRoomType").value = document.getElementById("stayDuration").innerText.split(': ')[1];
+        document.getElementById("SelectedRoomPrice").value = selectedRoomPrice;
+        document.getElementById("CheckinDate").value = document.getElementById("checkinDate").value;
+        document.getElementById("CheckoutDate").value = document.getElementById("checkoutDate").value;
+        document.getElementById("RoomQuantity").value = document.getElementById("roomQuantity").value;
 
+        document.getElementById("bookingForm").submit();  
+    }
 </script>
 
 

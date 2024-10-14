@@ -24,7 +24,15 @@ namespace VietTravel.Models
         {
             throw new UnintentionalCodeFirstException();
         }
-    
+        public class BookingViewModel
+        {
+            public string TenKhachSan { get; set; }
+            public string LoaiPhong { get; set; }
+            public decimal GiaPhong { get; set; }
+            public DateTime NgayDen { get; set; }
+            public DateTime NgayDi { get; set; }
+            public int SoLuong { get; set; }
+        }
         public virtual DbSet<Admin> Admins { get; set; }
         public virtual DbSet<Booking> Bookings { get; set; }
         public virtual DbSet<Combo> Comboes { get; set; }

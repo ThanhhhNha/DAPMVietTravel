@@ -23,7 +23,7 @@ namespace VietTravel.Controllers
                 return View("Error", new { message = "Không có dữ liệu tỉnh thành." });
             }
 
-            ViewBag.TinhList = tinhList;  
+            ViewBag.TinhList = tinhList;
 
             return View();
         }
@@ -31,17 +31,17 @@ namespace VietTravel.Controllers
 
         public ActionResult Search(string MaTinh, DateTime? checkIn, DateTime? checkOut)
         {
-            
+
             var tinhList = db.TinhThanhs.ToList();
             ViewBag.TinhList = tinhList;
 
-            
+
             var selectedProvince = db.TinhThanhs.FirstOrDefault(t => t.MaTinh == MaTinh);
-            ViewBag.SelectedMaTinh = MaTinh; 
+            ViewBag.SelectedMaTinh = MaTinh;
             ViewBag.ProvinceName = selectedProvince != null ? selectedProvince.TenTinh : "Chưa chọn tỉnh";
 
 
-            ViewBag.CheckIn = checkIn?.ToString("yyyy-MM-dd") ?? string.Empty; 
+            ViewBag.CheckIn = checkIn?.ToString("yyyy-MM-dd") ?? string.Empty;
             ViewBag.CheckOut = checkOut?.ToString("yyyy-MM-dd") ?? string.Empty;
 
 
@@ -62,31 +62,36 @@ namespace VietTravel.Controllers
             return db.Hotels.Where(h => h.MaTinh == MaTinh).ToList();
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose(); 
-            }
-            base.Dispose(disposing);
-        }
-        public ActionResult ChiTietKhachSan(string id, DateTime? checkIn, DateTime? checkOut)
+
+        public ActionResult ChiTietKhachSan(string id, DateTime? checkIn, DateTime? checkOut, string maBooking)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-
+            // Lấy thông tin khách sạn
             Hotel hotel = db.Hotels
-                 .Include("Phongs.LoaiPhong")
-                 .Include("Phongs.TrangThaiPhong")
-                 .FirstOrDefault(h => h.MaKhachSan == id);
+                .Include("Phongs.LoaiPhong")
+                .Include("Phongs.TrangThaiPhong")
+                .FirstOrDefault(h => h.MaKhachSan == id);
 
             if (hotel == null)
             {
                 return HttpNotFound();
             }
+
+            // Lấy thông tin đặt phòng từ bảng HotelDetails
+            HotelDetail hotelDetail = db.HotelDetails
+                .FirstOrDefault(d => d.MaBooking == maBooking ); 
+
+            if (hotelDetail != null)
+            {
+                ViewBag.NgayNhanPhong = hotelDetail.NgayNhanPhong.ToString("yyyy-MM-dd");
+                ViewBag.NgayTraPhong = hotelDetail.NgayTraPhong.ToString("yyyy-MM-dd");
+                ViewBag.MaPhong = hotelDetail.MaPhong;
+            }
+
             ViewBag.CheckIn = checkIn?.ToString("yyyy-MM-dd") ?? string.Empty;
             ViewBag.CheckOut = checkOut?.ToString("yyyy-MM-dd") ?? string.Empty;
             return View(hotel);

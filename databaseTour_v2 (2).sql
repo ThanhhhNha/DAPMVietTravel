@@ -356,3 +356,12 @@ CREATE TABLE Admin (
 INSERT INTO Admin (MaAdmin, TenAdmin, VaiTro, Username, Passwords)
 VALUES (N'AD001', N'Capypara', N'Admin', 'capy', 'capy123');
 Select * from Users
+DELETE FROM HotelDetails;
+
+ALTER TABLE HotelDetails
+ALTER COLUMN MaKhachSan NVARCHAR(10);
+
+ALTER TABLE HotelDetails
+ADD FOREIGN KEY (MaKhachSan) REFERENCES Hotels(MaKhachSan);
+
+Select * from HotelDetails

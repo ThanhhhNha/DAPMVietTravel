@@ -85,7 +85,11 @@ namespace VietTravel.Controllers
                 TempData["error"] = "Vui lòng điền đầy đủ thông tin!";
                 return View();
             }
-
+            if ( dienThoai.Length < 9 || dienThoai.Length >= 11)
+            {
+                TempData["error"] = "Số điện thoại phải có 10 chữ số!";
+                return View();
+            }
             // Kiểm tra tên đăng nhập đã tồn tại
             var existingUser = db.Users.SingleOrDefault(x => x.Username.ToLower() == username.ToLower());
             if (existingUser != null)
