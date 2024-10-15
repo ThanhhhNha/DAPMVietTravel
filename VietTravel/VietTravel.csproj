@@ -142,6 +142,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ListHotelsController.cs" />
     <Compile Include="Controllers\LoaiPhongsController.cs" />
+    <Compile Include="Controllers\Tours1Controller.cs" />
     <Compile Include="Controllers\ToursController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -361,6 +362,11 @@
     <Content Include="Views\Home\DanhSachKhachSan.cshtml" />
     <Content Include="Views\ListHotels\ChiTietKhachSan.cshtml" />
     <Content Include="Views\Home\ChiTietKhachSan.cshtml" />
+    <Content Include="Views\Tours1\Create.cshtml" />
+    <Content Include="Views\Tours1\Delete.cshtml" />
+    <Content Include="Views\Tours1\Details.cshtml" />
+    <Content Include="Views\Tours1\Edit.cshtml" />
+    <Content Include="Views\Tours1\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
