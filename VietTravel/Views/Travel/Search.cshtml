@@ -1,4 +1,6 @@
-﻿@using (Html.BeginForm("Search", "Travel", FormMethod.Post))
+﻿@model VietTravel.Models.SearchViewModel
+
+@using (Html.BeginForm("Search", "Travel", FormMethod.Post))
 {
     <div>
         <label>Ngân sách</label>
@@ -12,12 +14,24 @@
 
     <div>
         <label>Điểm khởi hành</label>
-        <input type="text" name="departure" />
+        <select name="departure">
+            <option value="">Tất cả</option>
+            @foreach (var tinh in Model.TinhThanhList)
+            {
+                <option value="@tinh.MaTinh">@tinh.TenTinh</option>
+            }
+        </select>
     </div>
 
     <div>
         <label>Điểm đến</label>
-        <input type="text" name="destination" />
+        <select name="destination">
+            <option value="">Tất cả</option>
+            @foreach (var tinh in Model.TinhThanhList)
+            {
+                <option value="@tinh.MaTinh">@tinh.TenTinh</option>
+            }
+        </select>
     </div>
 
     <div>
@@ -32,8 +46,6 @@
         <input type="checkbox" name="tourType" value="TietKiem" /> Tiết kiệm
         <input type="checkbox" name="tourType" value="GiaTot" /> Giá tốt
     </div>
-
-   
 
     <input type="submit" value="Tìm kiếm" />
 }

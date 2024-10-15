@@ -9,17 +9,16 @@ namespace VietTravel.Controllers
     {
         private readonly TravelVNEntities _db;
 
-        // Constructor để khởi tạo với database context
         public TourService(TravelVNEntities db)
         {
             _db = db;
         }
 
-        // Phương thức tìm kiếm tour dựa trên các tiêu chí
-        public IEnumerable<Tour> SearchTours(string budget, string departure, string destination,
-            DateTime? departureDate, string[] tourType, string[] transport)
+        // Phương thức tìm kiếm tour
+        public List<Tour> SearchTours(string budget, string departure, string destination, DateTime? departureDate, string[] tourType, string[] transport)
         {
-            var query = _db.Tours.AsQueryable();
+            // Sử dụng đúng tên DbSet là Tours
+            var tours = _db.Tours.Include("LoaiTour").Include("TinhThanh").AsQueryable();
 
             // Lọc theo ngân sách
             if (!string.IsNullOrEmpty(budget))
@@ -27,44 +26,49 @@ namespace VietTravel.Controllers
                 switch (budget)
                 {
                     case "Duoi5Trieu":
-                        query = query.Where(t => t.Gia < 5000000);
+                        tours = tours.Where(t => t.Gia < 5000000);
                         break;
                     case "5-10Trieu":
-                        query = query.Where(t => t.Gia >= 5000000 && t.Gia <= 10000000);
+                        tours = tours.Where(t => t.Gia >= 5000000 && t.Gia <= 10000000);
                         break;
                     case "10-20Trieu":
-                        query = query.Where(t => t.Gia >= 10000000 && t.Gia <= 20000000);
+                        tours = tours.Where(t => t.Gia >= 10000000 && t.Gia <= 20000000);
                         break;
                     case "Tren20Trieu":
-                        query = query.Where(t => t.Gia > 20000000);
+                        tours = tours.Where(t => t.Gia > 20000000);
                         break;
                 }
             }
 
-            // Lọc theo điểm khởi hành
+            // Lọc theo điểm khởi hành (departure)
             if (!string.IsNullOrEmpty(departure))
             {
-                query = query.Where(t => t.TinhThanh.TenTinh == departure);
+                tours = tours.Where(t => t.TinhThanh.TenTinh == departure);
             }
 
-           
+            // Lọc theo điểm đến (destination)
+            if (!string.IsNullOrEmpty(destination))
+            {
+                tours = tours.Where(t => t.TinhThanh.TenTinh == destination);
+            }
 
-            // Lọc theo ngày khởi hành
+            // Lọc theo ngày khởi hành (departureDate)
             if (departureDate.HasValue)
             {
-                query = query.Where(t => t.NgayKhoiHanh.Date == departureDate.Value.Date);
+                tours = tours.Where(t => t.NgayKhoiHanh >= departureDate.Value);
             }
 
-            // Lọc theo loại tour
+            // Lọc theo loại tour (tourType)
             if (tourType != null && tourType.Length > 0)
             {
-                query = query.Where(t => tourType.Contains(t.LoaiTour.TenLoaiTour));
+                tours = tours.Where(t => tourType.Contains(t.LoaiTour.MaLoaiTour));
             }
 
-            
-           
+            // Lọc theo phương tiện (transport) - nếu có cột PhuongTien trong bảng Tour
 
-            return query.ToList();
+
+            return tours.ToList(); // Trả về danh sách các tour sau khi lọc
         }
+
     }
 }

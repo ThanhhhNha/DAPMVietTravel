@@ -2,6 +2,7 @@
 
 @{
     ViewBag.Title = Model.TenTour; // Đặt tiêu đề của trang là tên tour
+    var imageFileName = Model.MaTour + ".jpg";
 }
 
 <div class="tour-detail-container" style="display: flex; flex-wrap: wrap; gap: 20px;">
@@ -9,25 +10,23 @@
     <div style="width: 100%;">
         <h1 style="font-size: 32px; font-weight: bold; text-align: center;">@Model.TenTour</h1>
     </div>
-
-    <!-- Hiển thị hình ảnh cố định hoặc dựa vào MaTour -->
+    
+    <!-- Hiển thị hình ảnh của tour theo MaTour -->
     <div class="tour-detail-image" style="flex-basis: 100%; text-align: center;">
-        @* Thay thế đường dẫn hình ảnh dựa trên MaTour hoặc dùng một hình ảnh mặc định *@
-        <<img src="@($"/image/Tour/{Model.MaTour}.png")" alt="@Model.TenTour" /
-             alt="@Model.TenTour"
+        <img alt="@Model.TenTour"
              loading="lazy"
              width="600"
              height="400"
              decoding="async"
-             class="animate__animated animate__fadeIn"
-             style="width:100%; max-width:600px; border-radius: 10px;" />
+             src="@Url.Content("~/image/tour/" + imageFileName)"
+             style="color: transparent; border-radius: 10px; max-width: 600px; width: 100%;" />
     </div>
 
     <!-- Phần thông tin tour -->
     <div class="tour-detail-info" style="flex-grow: 1; max-width: 600px; margin-top: 20px;">
         <p><strong>Mô tả:</strong> @Model.MoTa</p>
         <p><strong>Ngày khởi hành:</strong> @Model.NgayKhoiHanh.ToString("dd/MM/yyyy")</p>
-        <p><strong>Số ngày:</strong> @Model.ThoiGian</p> <!-- Sử dụng ThoiGian thay vì SoNgay -->
+        <p><strong>Số ngày:</strong> @Model.ThoiGian</p>
         <p><strong>Giá:</strong> @String.Format("{0:0,0 VNĐ}", Model.Gia)</p>
     </div>
 </div>
@@ -71,494 +70,181 @@
                 <h4>Chọn tháng</h4>
             </div>
             <div class="calendar--tour__month__list">
-                <div class="calendar--tour__month__list--item selectedMonth">10/2024</div>
-                <div class="calendar--tour__month__list--item month">11/2024</div>
-                <div class="calendar--tour__month__list--item month">12/2024</div>
-                <div class="calendar--tour__month__list--item month">1/2025</div>
-                <div class="calendar--tour__month__list--item month">2/2025</div>
-                <div class="calendar--tour__month__list--item month">3/2025</div>
+                <div class="calendar--tour__month__list--item selectedMonth" data-month="10" data-year="2024">10/2024</div>
+                <div class="calendar--tour__month__list--item month" data-month="11" data-year="2024">11/2024</div>
+                <div class="calendar--tour__month__list--item month" data-month="12" data-year="2024">12/2024</div>
+                <div class="calendar--tour__month__list--item month" data-month="1" data-year="2025">1/2025</div>
+                <div class="calendar--tour__month__list--item month" data-month="2" data-year="2025">2/2025</div>
             </div>
         </div>
-        <div class="calendar--tour__days box-shadow" style="box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;">
-            <div class="show-calendar">
-                <div class="calendar--tour__days__header">
-                    <div class="calendar--tour__days__header__content">
-                        <button aria-label="previous month" class="calendar--tour__days__header__content__arrow" disabled="">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="17" height="10" fill="none">
-                                <path fill="#000" fill-rule="evenodd" d="M.277 5.558c-.37-.308-.37-.808 0-1.116L5.314.232a1.08 1.08 0 0 1 1.335 0c.37.308.37.807 0 1.116L3.225 4.21h12.83c.522 0 .945.353.945.789s-.423.79-.944.79H3.225l3.424 2.862c.37.309.37.808 0 1.117a1.08 1.08 0 0 1-1.335 0z" clip-rule="evenodd"></path>
-                            </svg>
-                        </button>
-                        <div class="calendar--tour__days__header__content__choose">
-                            <div class="calendar--tour__days__header__content__choose__month">
-                                <button class="choose">Tháng 10/2024</button>
-                            </div>
-                        </div>
-                        <button aria-label="next month" class="calendar--tour__days__header__content__arrow">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="17" height="10" fill="none">
-                                <path fill="#000" fill-rule="evenodd" d="M16.723 5.558c.37-.308.37-.808 0-1.116L11.686.232a1.08 1.08 0 0 0-1.335 0c-.37.308-.37.807 0 1.116l3.424 2.863H.945C.422 4.21 0 4.564 0 5s.423.79.944.79h12.831l-3.424 2.862c-.37.309-.37.808 0 1.117a1.08 1.08 0 0 0 1.335 0z" clip-rule="evenodd"></path>
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-                <div class="calendar--tour__days__weekTitle">
-                    <div class="calendar--tour__days__weekTitle__item">T2</div>
-                    <div class="calendar--tour__days__weekTitle__item">T3</div>
-                    <div class="calendar--tour__days__weekTitle__item">T4</div>
-                    <div class="calendar--tour__days__weekTitle__item">T5</div>
-                    <div class="calendar--tour__days__weekTitle__item">T6</div>
-                    <div class="calendar--tour__days__weekTitle__item weekendDay">T7</div>
-                    <div class="calendar--tour__days__weekTitle__item weekendDay">CN</div>
-                </div>
-                <div class="calendar--tour__days__weekdays">
-                    <!-- Tuần 1 -->
-                    <div class="calendar--tour__days__weekdays__item pointer pastDay notAvailable anotherMonth">
-                        <div class="calendar--tour__days__weekdays__item--top"><p>30</p></div>
-                    </div>
-                    <div class="calendar--tour__days__weekdays__item pointer pastDay notAvailable currentMonth">
-                        <div class="calendar--tour__days__weekdays__item--top"><p>1</p></div>
-                    </div>
-                    <div class="calendar--tour__days__weekdays__item pointer pastDay notAvailable currentMonth">
-                        <div class="calendar--tour__days__weekdays__item--top"><p>2</p></div>
-                    </div>
-                    <div class="calendar--tour__days__weekdays__item pointer pastDay notAvailable currentMonth">
-                        <div class="calendar--tour__days__weekdays__item--top"><p>3</p></div>
-                    </div>
-                    <div class="calendar--tour__days__weekdays__item pointer pastDay notAvailable currentMonth">
-                        <div class="calendar--tour__days__weekdays__item--top"><p>4</p></div>
-                    </div>
-                    <div class="calendar--tour__days__weekdays__item pointer pastDay notAvailable weekendDay currentMonth">
-                        <div class="calendar--tour__days__weekdays__item--top"><p>5</p></div>
-                    </div>
-                    <div class="calendar--tour__days__weekdays__item pointer pastDay notAvailable weekendDay currentMonth">
-                        <div class="calendar--tour__days__weekdays__item--top"><p>6</p></div>
-                    </div>
-
-                    <!-- Tuần 2 -->
-                    <div class="calendar--tour__days__weekdays__item pointer pastDay notAvailable currentMonth">
-                        <div class="calendar--tour__days__weekdays__item--top"><p>7</p></div>
-                    </div>
-                    <div class="calendar--tour__days__weekdays__item pointer pastDay notAvailable currentMonth">
-                        <div class="calendar--tour__days__weekdays__item--top"><p>8</p></div>
-                    </div>
-                    <div class="calendar--tour__days__weekdays__item pointer pastDay notAvailable currentMonth">
-                        <div class="calendar--tour__days__weekdays__item--top"><p>9</p></div>
-                    </div>
-                    <div class="calendar--tour__days__weekdays__item pointer pastDay notAvailable currentMonth">
-                        <div class="calendar--tour__days__weekdays__item--top"><p>10</p></div>
-                    </div>
-                    <div class="calendar--tour__days__weekdays__item pointer pastDay notAvailable currentMonth">
-                        <div class="calendar--tour__days__weekdays__item--top"><p>11</p></div>
-                    </div>
-                    <div class="calendar--tour__days__weekdays__item pointer notAvailable weekendDay currentMonth">
-                        <div class="calendar--tour__days__weekdays__item--top"><p>12</p></div>
-                    </div>
-                    <div class="calendar--tour__days__weekdays__item pointer notAvailable weekendDay currentMonth">
-                        <div class="calendar--tour__days__weekdays__item--top"><p>13</p></div>
-                    </div>
-
-                    <!-- Tuần 3 -->
-                    <div class="calendar--tour__days__weekdays__item pointer notAvailable currentMonth">
-                        <div class="calendar--tour__days__weekdays__item--top"><p>14</p></div>
-                    </div>
-                    <div class="calendar--tour__days__weekdays__item pointer currentMonth">
-                        <div class="calendar--tour__days__weekdays__item--top"><p>15</p></div>
-                        <div class="calendar-day-price"><span class="">11,990K</span></div>
-                    </div>
-                    <div class="calendar--tour__days__weekdays__item pointer notAvailable currentMonth">
-                        <div class="calendar--tour__days__weekdays__item--top"><p>16</p></div>
-                    </div>
-                    <div class="calendar--tour__days__weekdays__item pointer notAvailable currentMonth">
-                        <div class="calendar--tour__days__weekdays__item--top"><p>17</p></div>
-                    </div>
-                    <div class="calendar--tour__days__weekdays__item pointer notAvailable currentMonth">
-                        <div class="calendar--tour__days__weekdays__item--top"><p>18</p></div>
-                    </div>
-                    <div class="calendar--tour__days__weekdays__item pointer weekendDay currentMonth">
-                        <div class="calendar--tour__days__weekdays__item--top"><p>19</p></div>
-                    </div>
-                    <div class="calendar--tour__days__weekdays__item pointer weekendDay currentMonth">
-                        <div class="calendar--tour__days__weekdays__item--top"><p>20</p></div>
-                    </div>
-
-                    <!-- Tuần 4 -->
-                    <div class="calendar--tour__days__weekdays__item pointer currentMonth">
-                        <div class="calendar--tour__days__weekdays__item--top"><p>21</p></div>
-                    </div>
-                    <div class="calendar--tour__days__weekdays__item pointer currentMonth">
-                        <div class="calendar--tour__days__weekdays__item--top"><p>22</p></div>
-                    </div>
-                    <div class="calendar--tour__days__weekdays__item pointer currentMonth">
-                        <div class="calendar--tour__days__weekdays__item--top"><p>23</p></div>
-                    </div>
-                    <div class="calendar--tour__days__weekdays__item pointer currentMonth">
-                        <div class="calendar--tour__days__weekdays__item--top"><p>24</p></div>
-                    </div>
-                    <div class="calendar--tour__days__weekdays__item pointer currentMonth">
-                        <div class="calendar--tour__days__weekdays__item--top"><p>25</p></div>
-                    </div>
-                    <div class="calendar--tour__days__weekdays__item pointer weekendDay currentMonth">
-                        <div class="calendar--tour__days__weekdays__item--top"><p>26</p></div>
-                        <div class="calendar-day-price"><span class="">1,990K</span></div>
-                    </div>
-                    <div class="calendar--tour__days__weekdays__item pointer weekendDay currentMonth">
-                        <div class="calendar--tour__days__weekdays__item--top"><p>27</p></div>
-                    </div>
-
-                    <!-- Tuần 5 -->
-                    <div class="calendar--tour__days__weekdays__item pointer currentMonth">
-                        <div class="calendar--tour__days__weekdays__item--top"><p>28</p></div>
-                    </div>
-                    <div class="calendar--tour__days__weekdays__item pointer currentMonth">
-                        <div class="calendar--tour__days__weekdays__item--top"><p>29</p></div>
-                    </div>
-                    <div class="calendar--tour__days__weekdays__item pointer currentMonth">
-                        <div class="calendar--tour__days__weekdays__item--top"><p>30</p></div>
-                    </div>
-                    <div class="calendar--tour__days__weekdays__item pointer currentMonth">
-                        <div class="calendar--tour__days__weekdays__item--top"><p>31</p></div>
-                    </div>
-                    <div class="calendar--tour__days__weekdays__item pointer anotherMonth">
-                        <div class="calendar--tour__days__weekdays__item--top"><p>1</p></div>
-                    </div>
-                    <div class="calendar--tour__days__weekdays__item pointer weekendDay anotherMonth">
-                        <div class="calendar--tour__days__weekdays__item--top"><p>2</p></div>
-                    </div>
-                    <div class="calendar--tour__days__weekdays__item pointer weekendDay anotherMonth">
-                        <div class="calendar--tour__days__weekdays__item--top"><p>3</p></div>
-                    </div>
-                    <!-- Các ngày khác được thêm tương tự -->
-                </div>
+        <div class="calendar--tour__days box-shadow" id="calendar-days">
+            <div class="calendar-weekdays">
+                <div>CN</div>
+                <div>Hai</div>
+                <div>Ba</div>
+                <div>Tư</div>
+                <div>Năm</div>
+                <div>Sáu</div>
+                <div>Bảy</div>
             </div>
-            <span class="text-danger calendar-warning"><i>Quý khách vui lòng chọn ngày phù hợp</i></span>
+            <div class="calendar-dates"></div>
+        </div>
+        <div class="calendar--tour__days box-shadow" id="calendar-days">
+            <!-- Các ngày trong tháng sẽ được tạo ra ở đây -->
         </div>
     </div>
-</div>
-<div class="tour-detail-back">
-    <a href="@Url.Action("DuLichTravel", "Travel")" class="btn btn-secondary">Quay lại danh sách tour</a>
-</div>
+    <span class="text-danger calendar-warning"><i>Quý khách vui lòng chọn ngày phù hợp</i></span>
+    <div id="tour-details" style="margin-top: 20px;">
+        <!-- Thông tin chi tiết tour sẽ được hiển thị tại đây sau khi chọn ngày -->
+    </div>
+    <!-- Trường ẩn chứa mã tour -->
+    <input type="hidden" id="maTour" value="@Model.MaTour" />
+
+    <div class="tour-detail-back">
+        <a href="@Url.Action("DuLichTravel", "Travel")" class="btn btn-secondary">Quay lại danh sách tour</a>
+        <script src="~/Scripts/calendar.js"></script>
+    </div>
 
 
-
-<style>
-    .tour-detail-container {
-        padding: 20px;
-        background-color: #fff;
-        border: 1px solid #ddd;
-        border-radius: 8px;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        max-width: 800px;
-        margin: auto;
-    }
-
-    .tour-detail-image {
-        margin-bottom: 20px;
-    }
-
-    .tour-detail-info {
-        font-size: 18px;
-        line-height: 1.6;
-    }
-
-    .tour-detail-back {
-        margin-top: 20px;
-    }
-
-    .btn-secondary {
-        background-color: #007bff;
-        color: white;
-        padding: 10px 20px;
-        text-decoration: none;
-        border-radius: 5px;
-    }
-
-        .btn-secondary:hover {
-            background-color: #0056b3;
+    <style>
+        /* CSS đã được cập nhật để giữ bố cục gọn gàng */
+        .tour-detail-container {
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            margin: auto;
         }
 
-    /* CSS cho phần lịch khởi hành */
-    .calendar-container {
-        max-width: 800px;
-        margin: 20px auto;
-        text-align: center;
-        background-color: #fff;
-        padding: 20px;
-        border-radius: 10px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    }
+        .tour-detail-image {
+            margin-bottom: 20px;
+        }
 
-    .calendar-title {
-        font-size: 24px;
-        margin-bottom: 20px;
-        font-weight: bold;
-    }
-
-    .calendar-wrapper {
-        display: flex;
-        justify-content: space-between;
-    }
-
-    .calendar-month-selector {
-        width: 20%;
-    }
-
-        .calendar-month-selector h4 {
+        .tour-detail-info {
             font-size: 18px;
+            line-height: 1.6;
+        }
+
+        .tour-detail-back {
+            margin-top: 20px;
+        }
+
+        .btn-secondary {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+            .btn-secondary:hover {
+                background-color: #0056b3;
+            }
+        /* CSS cho phần lịch khởi hành */
+        .calendar-container {
+            display: flex;
+            gap: 20px;
+        }
+
+        /* CSS cho phần tháng */
+        .calendar-months {
+            display: flex;
+            flex-direction: row;
+            gap: 10px; /* Khoảng cách giữa các tháng */
+        }
+
+            .calendar-months ul {
+                list-style: none;
+                padding: 0;
+                display: flex; /* Để các mục tháng hiển thị theo hàng ngang */
+            }
+
+        .calendar-months-item {
+            padding: 10px;
+            background-color: #f1f1f1;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+            .calendar-months-item.selected-month {
+                background-color: #0046d5;
+                color: white;
+            }
+
+
+        .calendar-days {
+            flex-grow: 1;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 20px;
             margin-bottom: 10px;
         }
 
-    .calendar--tour__month__list {
-        display: flex; /* Để các mục tháng hiển thị theo hàng ngang */
-        justify-content: space-between; /* Tạo khoảng cách đều giữa các mục */
-        padding: 10px 0;
-    }
-
-    .calendar--tour__month__list--item {
-        padding: 10px 20px;
-        background-color: #f5f5f5;
-        cursor: pointer;
-        border-radius: 5px;
-        margin: 0 5px;
-        text-align: center;
-    }
-
-        .calendar--tour__month__list--item:hover {
-            background-color: #0056b3;
-            color: white;
-        }
-
-        .calendar--tour__month__list--item.selectedMonth {
-            background-color: #007bff;
-            color: white;
+        .calendar-weekdays {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            text-align: center;
             font-weight: bold;
+            margin-bottom: 10px;
         }
 
-        .calendar--tour__month__list--item.month {
-            color: #000;
+        .calendar-dates {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 10px;
         }
 
-    .month-list {
-        display: flex;
-        flex-direction: column;
-    }
+            .calendar-dates div {
+                text-align: center;
+                padding: 10px;
+                background-color: #f9f9f9;
+                border-radius: 5px;
+                cursor: pointer;
+                transition: background-color 0.3s; /* Thêm hiệu ứng chuyển màu */
+            }
 
-    .month-item {
-        padding: 10px;
-        background-color: #f5f5f5;
-        margin-bottom: 5px;
-        cursor: pointer;
-    }
+                .calendar-dates div:hover {
+                    background-color: #0046d5; /* Màu khi hover */
+                    color: white;
+                }
 
-        .month-item.selected {
-            background-color: #007bff;
-            color: #fff;
+                .calendar-dates div.special {
+                    background-color: #ff9f00;
+                    color: white;
+                }
+
+                    .calendar-dates div.special::after {
+                        content: '🎁'; /* Biểu tượng quà tặng */
+                        display: block;
+                        font-size: 12px;
+                        margin-top: 5px;
+                    }
+
+                .calendar-dates div.price {
+                    color: red;
+                    font-weight: bold;
+                }
+
+        .calendar-dates-item {
+            text-align: center;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+            cursor: pointer;
         }
 
-    .calendar-days {
-        width: 75%;
-    }
+            .calendar-dates-item.selected {
+                background-color: #0046d5;
+                color: white;
+            }
 
-    .calendar-header {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        box-sizing: border-box;
-        color: rgb(23, 23, 23);
-        font-family: '__Inter_36bd41', '__Inter_Fallback_36bd41';
-        font-size: 16px;
-        font-style: normal;
-        font-weight: 400;
-        height: 68.8px;
-        letter-spacing: normal;
-        line-height: 24px;
-        text-rendering: optimizespeed;
-        width: 306.562px;
-        -webkit-font-smoothing: antialiased;
-    }
-
-    .calendar-month {
-        font-size: 20px;
-        font-weight: bold;
-    }
-
-    .calendar--tour__days {
-        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-        padding: 20px;
-        background-color: #fff;
-        border-radius: 10px;
-        border: 1px solid #ddd; /* Thêm khung viền */
-    }
-
-    .calendar--tour__month {
-        box-shadow: rgba(0, 0, 0, 0.15) 0px 4px 12px;
-        padding: 10px;
-        background-color: #f9f9f9;
-        border-radius: 8px;
-        border: 1px solid #ccc; /* Thêm khung viền cho phần chọn tháng */
-        margin-bottom: 15px;
-    }
-
-    .calendar--tour__days__weekdays {
-        display: grid;
-        grid-template-columns: repeat(7, 1fr); /* Chia thành 7 cột cho 7 ngày trong tuần */
-        gap: 1rem; /* Khoảng cách giữa các ngày */
-        padding: 1rem 0;
-    }
-
-    .calendar--tour__days__weekTitle {
-        display: flex;
-        justify-content: space-between; /* Chia đều khoảng cách giữa các phần tử */
-        padding: 10px 0; /* Khoảng cách trên dưới */
-        font-size: 16px;
-    }
-
-    calendar--tour__days__weekTitle__item {
-        flex: 1; /* Chia đều không gian cho các phần tử */
-        text-align: center; /* Căn giữa nội dung bên trong */
-    }
-
-    .calendar--tour__days__header {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 10px 0;
-        position: relative;
-    }
-
-    .calendar--tour__days__header__content {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .calendar--tour__days__header__content__choose__month {
-        font-family: 'Inter', sans-serif;
-        font-size: 18px;
-        font-weight: 600;
-        color: #007bff;
-        text-align: center;
-        flex-grow: 1;
-    }
-
-    .calendar--tour__days__header__content__arrow {
-        display: inline-flex;
-        justify-content: center;
-        align-items: center;
-        background-color: #f5f5f5;
-        border: none;
-        border-radius: 50%;
-        width: 36px;
-        height: 36px;
-        cursor: pointer;
-        box-shadow: none;
-    }
-
-        .calendar--tour__days__header__content__arrow:hover {
-            background-color: #e0e0e0;
-        }
-
-        .calendar--tour__days__header__content__arrow svg {
-            width: 17px;
-            height: 10px;
-        }
-
-    .calendar--tour__days__header__left-arrow {
-        position: absolute;
-        left: 10px;
-    }
-
-    .calendar--tour__days__header__right-arrow {
-        position: absolute;
-        right: 10px;
-    }
-
-
-    .choose {
-        background-color: transparent;
-        border: none;
-        font-size: inherit;
-        color: inherit;
-        cursor: default;
-    }
-
-    .arrow-left, .arrow-right {
-        background-color: #007bff;
-        color: #fff;
-        border: none;
-        padding: 5px 10px;
-        cursor: pointer;
-    }
-
-        .arrow-left:disabled {
-            background-color: #ccc;
-        }
-
-    .weekdays, .days {
-        display: grid;
-        grid-template-columns: repeat(7, 1fr);
-        gap: 10px;
-    }
-
-    .weekday, .day {
-        padding: 10px;
-        background-color: #f5f5f5;
-        border-radius: 5px;
-    }
-
-    .weekday {
-        font-weight: bold;
-    }
-
-    .weekend {
-        color: red;
-    }
-
-    .day.price-day {
-        position: relative;
-    }
-
-    .price {
-        font-size: 12px;
-        color: red;
-        position: absolute;
-        bottom: 5px;
-        right: 5px;
-    }
-
-    /* CSS cho các nút */
-    .button {
-        display: inline-block;
-        font-size: 16px;
-        padding: 10px 20px;
-        color: white;
-        background-color: #007bff;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        text-align: center;
-        margin-top: 20px;
-    }
-
-        .button svg {
-            margin-right: 8px;
-        }
-
-        .button:hover {
-            background-color: #0056b3;
-        }
-
-    .btn-phone {
-        background-color: #28a745;
-    }
-
-        .btn-phone:hover {
-            background-color: #218838;
-        }
-
-    .btn-mail {
-        background-color: #ffc107;
-    }
-
-        .btn-mail:hover {
-            background-color: #e0a800;
-        }
-</style>

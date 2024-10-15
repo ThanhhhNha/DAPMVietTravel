@@ -205,6 +205,7 @@
     <Compile Include="Models\Role.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\SearchViewModel.cs" />
     <Compile Include="Models\TinhThanh.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -274,18 +275,16 @@
     <Content Include="image\phong\room2.jpg" />
     <Content Include="image\phuquoc.jpg" />
     <Content Include="image\quynhon.jpg" />
-    <Content Include="image\Tour\tour1.jpg" />
-    <Content Include="image\Tour\tour2.jpg" />
-    <Content Include="image\Tour\tour3.jpg" />
-    <Content Include="image\Tour\tour4.jpg" />
-    <Content Include="image\Tour\tour5.jpg" />
-    <Content Include="image\Tour\tour6.jpg" />
-    <Content Include="image\Tour\tour7.jpg" />
-    <Content Include="image\Tour\tour8.jpg" />
-    <Content Include="image\Tour\tour9.jpg" />
-    <Content Include="image\Tour\tour10.jpg" />
-    <Content Include="image\Tour\tour11.jpg" />
-    <Content Include="image\Tour\tour12.jpg" />
+    <Content Include="image\Tour\T002.jpg" />
+    <Content Include="image\Tour\T006.jpg" />
+    <Content Include="image\Tour\T007.jpg" />
+    <Content Include="image\Tour\T008.jpg" />
+    <Content Include="image\Tour\T009.jpg" />
+    <Content Include="image\Tour\T010.jpg" />
+    <Content Include="image\Tour\T011.jpg" />
+    <Content Include="image\Tour\T003.jpg" />
+    <Content Include="image\Tour\T004.jpg" />
+    <Content Include="image\Tour\T005.jpg" />
     <Content Include="image\visa.png" />
     <Content Include="image\youtube.png" />
     <Content Include="Models\Model1.Context.tt">
@@ -326,6 +325,7 @@
       <DependentUpon>Model1.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-3.7.0.intellisense.js" />
+    <Content Include="Scripts\calendar.js" />
     <Content Include="Scripts\jquery-3.7.0.js" />
     <Content Include="Scripts\jquery-3.7.0.min.js" />
     <Content Include="Scripts\jquery-3.7.0.slim.js" />

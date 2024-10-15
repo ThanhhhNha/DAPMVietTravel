@@ -1,8 +1,4 @@
-﻿@{
-    ViewBag.Title = "Du Lịch Vietravel";
-}
-
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="vi">
 <head>
     <meta charset="utf-8" />
@@ -67,6 +63,7 @@
             margin-bottom: 30px;
         }
 
+        /* Điều chỉnh hiển thị bộ lọc và danh sách tour theo hàng ngang */
         .content-wrapper {
             display: flex;
             gap: 20px; /* Khoảng cách giữa bộ lọc và danh sách tour */
@@ -150,17 +147,6 @@
             </div>
         </section>
 
-        <div class="find-tour-header__container section-container">
-            <div class="breadcrumb-container">
-                <div><a title="Điểm đến" class="normal-link ">Điểm đến</a> / </div>
-                <div><a title="Du lịch trong nước" class="normal-link ">Du lịch trong nước</a></div>
-            </div>
-            <div class="find-tour-header__title animate__fadeIn animate__animated ">
-                <h1 class="find-tour-header__title">Du lịch trong nước</h1>
-                <p id="description" class="animate__fadeIn animate__animated ">Du lịch trong nước luôn là lựa chọn tuyệt vời. Đường bờ biển dài hơn 3260km, những khu bảo tồn thiên nhiên tuyệt vời, những thành phố nhộn nhịp, những di tích lịch sử hào hùng, nền văn hóa độc đáo và hấp dẫn, cùng một danh sách dài những món ăn ngon nhất thế giới, Việt Nam có tất cả những điều đó. Với lịch trình dày, khởi hành đúng thời gian cam kết, Vietravel là công ty lữ hành uy tín nhất hiện nay tại Việt Nam, luôn sẵn sàng phục vụ du khách mọi lúc, mọi nơi, đảm bảo tính chuyên nghiệp và chất lượng dịch vụ tốt nhất thị trường</p>
-            </div>
-        </div>
-
         <div class="content-wrapper">
             <!-- Bộ lọc tìm kiếm -->
             <section class="find-tour-content__filter">
@@ -186,27 +172,10 @@
                             </div>
                             <select name="departure">
                                 <option value="">Tất cả</option>
-                                <option value="TPHCM">TP. Hồ Chí Minh</option>
-                                <option value="Hue">Huế</option>
-                                <option value="QuyNhon">Quy Nhơn</option>
-                                <option value="PhuQuoc">Phú Quốc</option>
-                                <option value="LongXuyen">Long Xuyên</option>
-                                <option value="QuangNgai">Quảng Ngãi</option>
-                                <option value="VungTau">Vũng Tàu</option>
-                                <option value="QuangNinh">Quảng Ninh</option>
-                                <option value="BuonMaThuot">Buôn Ma Thuột</option>
-                                <option value="Vinh">Vinh</option>
-                                <option value="CaMau">Cà Mau</option>
-                                <option value="RachGia">Rạch Giá</option>
-                                <option value="DaLat">Đà Lạt</option>
-                                <option value="ThanhHoa">Thanh Hóa</option>
-                                <option value="HaNoi">Hà Nội</option>
-                                <option value="DaNang">Đà Nẵng</option>
-                                <option value="ThaiNguyen">Thái Nguyên</option>
-                                <option value="CanTho">Cần Thơ</option>
-                                <option value="HaiPhong">Hải Phòng</option>
-                                <option value="BinhDuong">Bình Dương</option>
-                                <option value="NhaTrang">Nha Trang</option>
+                                @foreach (var tinh in Model.TinhThanhList)
+                                {
+                                    <option value="@tinh.MaTinh">@tinh.TenTinh</option>
+                                }
                             </select>
                         </div>
 
@@ -217,26 +186,10 @@
                             </div>
                             <select name="destination">
                                 <option value="">Tất cả</option>
-                                <option value="NinhThuan">Ninh Thuận</option>
-                                <option value="NgheAn">Nghệ An</option>
-                                <option value="PhuYen">Phú Yên</option>
-                                <option value="CaoBang">Cao Bằng</option>
-                                <option value="BacKan">Bắc Kạn</option>
-                                <option value="ThanhHoa">Thanh Hóa</option>
-                                <option value="SonLa">Sơn La</option>
-                                <option value="HaGiang">Hà Giang</option>
-                                <option value="CaMau">Cà Mau</option>
-                                <option value="QuyNhon">Quy Nhơn</option>
-                                <option value="DienBien">Điện Biên</option>
-                                <option value="BenTre">Bến Tre</option>
-                                <option value="ConDao">Côn Đảo</option>
-                                <option value="KienGiang">Kiên Giang</option>
-                                <option value="BinhThuan">Bình Thuận</option>
-                                <option value="HaTinh">Hà Tĩnh</option>
-                                <option value="QuangNinh">Quảng Ninh</option>
-                                <option value="TPHCM">TP. Hồ Chí Minh</option>
-                                <option value="QuangNgai">Quảng Ngãi</option>
-                                <option value="DongThap">Đồng Tháp</option>
+                                @foreach (var tinh in Model.TinhThanhList)
+                                {
+                                    <option value="@tinh.MaTinh">@tinh.TenTinh</option>
+                                }
                             </select>
                         </div>
 
@@ -252,10 +205,10 @@
                                 <div class="find-tour-content__filter--label">Dòng tour</div>
                             </div>
                             <div class="tag-container">
-                                <label><input type="checkbox" name="tourType" value="CaoCap"> Cao cấp</label><br>
-                                <label><input type="checkbox" name="tourType" value="TieuChuan"> Tiêu chuẩn</label><br>
-                                <label><input type="checkbox" name="tourType" value="TietKiem"> Tiết kiệm</label><br>
-                                <label><input type="checkbox" name="tourType" value="GiaTot"> Giá tốt</label>
+                                @foreach (var loaiTour in Model.LoaiTourList)
+                                {
+                                    <label><input type="checkbox" name="tourType" value="@loaiTour.MaLoaiTour"> @loaiTour.TenLoaiTour</label><br>
+                                }
                             </div>
                         </div>
 
@@ -277,12 +230,10 @@
 
             <!-- Danh sách tour -->
             <div class="tour-list">
-                @{
-                    int index = 0; // Khởi tạo biến đếm
-                }
-                @foreach (var tour in Model)
+                @foreach (var tour in Model.Tours) // Đảm bảo Model là danh sách các đối tượng Tour
                 {
-                    var imageFileName = "tour" + (index + 1).ToString() + ".png"; // Gán tên ảnh dựa trên vị trí
+                    // Sử dụng MaTour để tạo tên tệp ảnh, giả sử ảnh có định dạng .jpg
+                    var imageFileName = tour.MaTour + ".jpg";
 
                     <div class="card-filter-desktop">
                         <div class="card-filter-desktop__thumbnail">
@@ -292,7 +243,7 @@
                                  width="250"
                                  height="180"
                                  decoding="async"
-                                 src="@Url.Content("~/image/Tour/" + imageFileName)"
+                                 src="@Url.Content("~/image/tour/" + imageFileName)"
                                  style="color: transparent; border-radius: 10px;" />
                         </div>
                         <div class="card-filter-desktop__content">
@@ -305,14 +256,11 @@
                         </div>
                     </div>
                     <hr />
-                    index++; // Tăng biến đếm sau mỗi vòng lặp
                 }
             </div>
-
-
         </div>
-    </div>
 
+    </div>
 
     <footer>
         <p>Bản quyền © 2024 Vietravel</p>
