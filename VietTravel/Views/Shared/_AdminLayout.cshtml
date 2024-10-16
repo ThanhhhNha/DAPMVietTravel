@@ -17,14 +17,14 @@
 
 
     <div style="overflow: hidden">
-        <div class="header header-pc" style="background-color: #ffffff; padding: 3px 0">
+        <div class="header header-pc" style="background-color: #ffffff; padding: 3px 0; height: 60px;">
             <div class="container" style="display: flex; align-items: center;">
                 <div class="navbar-left">
                     <a href="@Url.Action("AdminTrangChu","Account")">
                         <img src="~/image/logo01.png" style="height:45px" />
                     </a>
                 </div>
-                <div class="navbar-center">
+                @*<div class="navbar-center">
                     <ul class="navbar-left_items">
                         <li class="navbar-left_item">
                             @Html.ActionLink("Trang chủ", "TrangChu", "Home", new { area = "" }, new { @class = "text-none" })
@@ -37,7 +37,7 @@
                         </li>
                     </ul>
 
-                </div>
+                </div>*@
 
                 <div class="navbar-right" style="margin-left: auto;">
                     <ul class="navbar-right_items">

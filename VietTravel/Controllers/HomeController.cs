@@ -31,23 +31,24 @@ namespace VietTravel.Controllers
 
         public ActionResult Search(string MaTinh, DateTime? checkIn, DateTime? checkOut)
         {
-
             var tinhList = db.TinhThanhs.ToList();
             ViewBag.TinhList = tinhList;
-
 
             var selectedProvince = db.TinhThanhs.FirstOrDefault(t => t.MaTinh == MaTinh);
             ViewBag.SelectedMaTinh = MaTinh;
             ViewBag.ProvinceName = selectedProvince != null ? selectedProvince.TenTinh : "Chưa chọn tỉnh";
 
-
             ViewBag.CheckIn = checkIn?.ToString("yyyy-MM-dd") ?? string.Empty;
             ViewBag.CheckOut = checkOut?.ToString("yyyy-MM-dd") ?? string.Empty;
 
+            var hotels = db.Hotels.Where(h => h.MaTinh == MaTinh).ToList();
 
-            var hotels = db.Hotels
-                           .Where(h => h.MaTinh == MaTinh)
-                           .ToList();
+            if (hotels == null || !hotels.Any())
+            {
+                // Trả về view với thông báo không có khách sạn nào ở tỉnh thành này
+                ViewBag.NoHotelsMessage = "Không có khách sạn nào ở tỉnh thành này.";
+                return View("DanhSachKhachSan", new List<Hotel>()); // Trả về danh sách rỗng
+            }
 
             return View("DanhSachKhachSan", hotels);
         }
